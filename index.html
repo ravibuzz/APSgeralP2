@@ -3,561 +3,716 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado Completo: Pediatria e APS (35 Questões)</title>
+    <title>Simulado Avançado APS V - Medicina</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .explanation-scroll::-webkit-scrollbar { width: 8px; }
-        .explanation-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        .explanation-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        .explanation-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .option-card {
+            transition: all 0.2s ease;
+        }
+        
+        .option-card:hover:not(.disabled) {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .option-selected {
+            border-color: #2563eb !important;
+            background-color: #dbeafe !important;
+            font-weight: 500;
+        }
+
+        .option-correct {
+            border-color: #059669 !important;
+            background-color: #d1fae5 !important;
+            color: #065f46;
+        }
+
+        .option-wrong {
+            border-color: #dc2626 !important;
+            background-color: #fee2e2 !important;
+            color: #991b1b;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar for the explanation area */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="h-screen flex flex-col text-slate-800">
 
-    <header class="bg-white shadow-sm sticky top-0 z-10">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i data-lucide="stethoscope" class="text-indigo-600 h-6 w-6"></i>
-                <h1 class="text-lg font-bold text-slate-800 hidden sm:block">Simulado Completo (35Q)</h1>
-                <h1 class="text-lg font-bold text-slate-800 sm:hidden">Simulado 35Q</h1>
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200 z-10">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg">
+                    <i class="fas fa-user-md text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-slate-800 leading-tight">Simulado APS V</h1>
+                    <p class="text-xs text-slate-500 font-medium">Internato & Residência</p>
+                </div>
             </div>
-            <div class="text-sm font-medium bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-100">
-                Questão <span id="current-q-num">1</span> de <span id="total-q-num">35</span>
+            
+            <div class="flex items-center gap-4">
+                <div class="hidden md:block text-right">
+                    <div class="text-xs text-slate-500 uppercase tracking-wide font-semibold">Progresso</div>
+                    <div class="font-bold text-blue-600"><span id="current-q-num">1</span>/<span id="total-q-num">30</span></div>
+                </div>
+                <div class="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
             </div>
-        </div>
-        <div class="w-full bg-slate-200 h-1.5">
-            <div id="progress-bar" class="bg-indigo-500 h-1.5 transition-all duration-500 ease-out" style="width: 0%"></div>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center p-4 sm:p-6">
-        
-        <div id="start-screen" class="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 text-center fade-in">
-            <div class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i data-lucide="book-open-check" class="text-indigo-600 h-10 w-10"></i>
-            </div>
-            <h2 class="text-3xl font-bold text-slate-800 mb-4">Desafio Completo</h2>
-            <p class="text-slate-600 mb-8 text-lg">Agora sim: <strong>35 questões</strong> abrangendo todos os detalhes do resumo, incluindo marcos motores específicos, regras de vacinação e embriologia.</p>
-            <button onclick="startQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2 mx-auto w-full sm:w-auto">
-                <i data-lucide="play"></i> Iniciar Simulado
-            </button>
-        </div>
-
-        <div id="quiz-container" class="max-w-5xl w-full hidden flex-col lg:flex-row gap-6 fade-in">
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto custom-scroll p-4 md:p-6">
+        <div class="max-w-4xl mx-auto">
             
-            <div class="flex-1 flex flex-col gap-6">
-                <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-500">
-                    <span id="q-category" class="text-xs font-bold tracking-wider text-indigo-600 uppercase mb-2 block">Categoria</span>
-                    <h2 id="question-text" class="text-xl sm:text-2xl font-semibold text-slate-800 leading-relaxed"></h2>
+            <!-- Score Board (Hidden initially) -->
+            <div id="score-screen" class="hidden bg-white rounded-2xl shadow-lg p-8 text-center max-w-lg mx-auto mt-10 fade-in">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-trophy text-4xl text-blue-600"></i>
                 </div>
-
-                <div id="options-container" class="grid grid-cols-1 gap-3"></div>
-            </div>
-
-            <div class="lg:w-96 flex-shrink-0">
-                <div id="feedback-panel" class="bg-white rounded-2xl shadow-lg h-full hidden flex-col border border-slate-100 overflow-hidden">
-                    <div id="feedback-header" class="p-4 text-white font-bold flex items-center gap-2"></div>
-                    <div class="p-5 flex-grow flex flex-col">
-                        <h3 class="text-sm font-bold text-slate-400 uppercase mb-2">Comentário do Gabarito:</h3>
-                        <div id="explanation-text" class="text-sm text-slate-700 leading-relaxed flex-grow explanation-scroll overflow-y-auto max-h-[60vh] lg:max-h-[500px]"></div>
-                    </div>
-                    <div class="p-4 bg-slate-50 border-t border-slate-100">
-                        <button id="next-btn" onclick="nextQuestion()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2">
-                            Próxima Questão <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
+                <h2 class="text-2xl font-bold mb-2">Simulado Finalizado!</h2>
+                <p class="text-slate-500 mb-6">Aqui está o seu desempenho geral.</p>
                 
-                <div id="feedback-placeholder" class="hidden lg:flex bg-slate-100 rounded-2xl border-2 border-dashed border-slate-200 h-full items-center justify-center p-6 text-center text-slate-400">
-                    <div>
-                        <i data-lucide="message-square" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
-                        <p class="text-sm">Selecione uma alternativa para ver o comentário detalhado.</p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                        <div class="text-3xl font-bold text-green-600" id="final-correct">0</div>
+                        <div class="text-xs text-green-700 font-semibold uppercase">Acertos</div>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                        <div class="text-3xl font-bold text-red-600" id="final-wrong">0</div>
+                        <div class="text-xs text-red-700 font-semibold uppercase">Erros</div>
                     </div>
                 </div>
+
+                <div class="text-4xl font-black text-slate-800 mb-2" id="final-percentage">0%</div>
+                <p class="text-sm text-slate-400 mb-8">Aproveitamento</p>
+
+                <button onclick="restartQuiz()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0">
+                    Refazer Simulado
+                </button>
+            </div>
+
+            <!-- Question Container -->
+            <div id="quiz-container" class="fade-in">
+                <!-- Bloco Tag -->
+                <div class="mb-4 flex items-center gap-2">
+                    <span id="question-block" class="px-3 py-1 bg-slate-200 text-slate-600 text-xs font-bold rounded-full uppercase tracking-wider">
+                        Bloco 1
+                    </span>
+                </div>
+
+                <!-- Question Text -->
+                <h2 id="question-text" class="text-xl md:text-2xl font-semibold text-slate-800 mb-8 leading-relaxed">
+                    Carregando pergunta...
+                </h2>
+
+                <!-- Options Grid -->
+                <div id="options-container" class="space-y-3 mb-8">
+                    <!-- Options inserted by JS -->
+                </div>
+
+                <!-- Feedback Section -->
+                <div id="feedback-container" class="hidden rounded-xl border-l-4 p-6 mb-8 bg-white shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div id="feedback-icon" class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            <!-- Icon -->
+                        </div>
+                        <h3 id="feedback-title" class="font-bold text-lg"></h3>
+                    </div>
+                    <div class="pl-11">
+                        <p class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Gabarito Comentado</p>
+                        <div id="feedback-text" class="text-slate-700 leading-relaxed prose prose-blue max-w-none">
+                            <!-- Comment -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div id="result-screen" class="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 text-center hidden fade-in">
-            <div id="score-icon-container" class="mb-6"></div>
-            <h2 class="text-3xl font-bold text-slate-800 mb-2">Simulado Concluído!</h2>
-            <p class="text-slate-600 mb-8">Você completou todas as 35 questões.</p>
-            
-            <div class="grid grid-cols-2 gap-4 mb-8">
-                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
-                    <p class="text-emerald-600 text-sm font-semibold uppercase">Acertos</p>
-                    <p id="score-correct" class="text-4xl font-bold text-emerald-700">0</p>
-                </div>
-                <div class="bg-red-50 p-4 rounded-xl border border-red-100">
-                    <p class="text-red-600 text-sm font-semibold uppercase">Erros</p>
-                    <p id="score-wrong" class="text-4xl font-bold text-red-700">0</p>
-                </div>
-            </div>
-
-            <div class="bg-slate-100 rounded-xl p-4 mb-8">
-                <p class="text-slate-600 text-sm">Nota Final</p>
-                <p id="final-percentage" class="text-2xl font-bold text-slate-800">0%</p>
-            </div>
-
-            <button onclick="location.reload()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all w-full flex items-center justify-center gap-2">
-                <i data-lucide="refresh-cw"></i> Refazer Simulado
-            </button>
-        </div>
-
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
-        <div class="max-w-4xl mx-auto px-4 text-center text-slate-500 text-xs">
-            <p>Baseado no Resumo APS Vp2.pdf | Conteúdo Educacional</p>
+    <!-- Footer Navigation -->
+    <footer class="bg-white border-t border-slate-200 p-4 z-10">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <button onclick="prevQuestion()" id="btn-prev" class="px-4 py-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                <i class="fas fa-arrow-left mr-2"></i> Anterior
+            </button>
+            
+            <button onclick="nextQuestion()" id="btn-next" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-md shadow-blue-200 transition-all transform hover:-translate-y-0.5 flex items-center">
+                Próxima <i class="fas fa-arrow-right ml-2"></i>
+            </button>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons();
-
-        const questions = [
-            // --- QUESTÕES ORIGINAIS (1-25) ---
+        // --- DATA: 30 Questions ---
+        const quizData = [
             {
-                category: "Bloco 1: Neurodesenvolvimento",
-                question: "Durante a anamnese de um lactente com quadro convulsivo de difícil controle, a ressonância magnética evidencia lisencefalia e heterotopias nodulares periventriculares. Considerando a embriologia do Sistema Nervoso Central, o evento patológico determinante para tais achados ocorreu, cronologicamente, na etapa de:",
-                options: ["A) Neurulação (até 28 dias).", "B) Proliferação neuronal (8ª a 12ª semana).", "C) Migração neuronal (12ª a 20ª semana).", "D) Organização sináptica (> 20 semanas)."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>A Migração Neuronal ocorre entre 12 e 20 semanas. Falhas geram lisencefalia (cérebro liso) e heterotopias (neurônios no lugar errado)."
-            },
-            {
-                category: "Bloco 1: Neurodesenvolvimento",
-                question: "Um recém-nascido apresenta anencefalia diagnosticada no pré-natal. Segundo a cronologia do desenvolvimento embriológico, essa malformação ocorre devido a uma falha na etapa de:",
-                options: ["A) Neurulação (até 18-28 dias).", "B) Proliferação Neuronal (12-16 semanas).", "C) Migração Neuronal.", "D) Mielinização."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>A anencefalia é um defeito do fechamento do tubo neural, evento da Neurulação."
-            },
-            {
-                category: "Bloco 1: Reflexos Primitivos",
-                question: "Sobre os reflexos primitivos e a integridade do sistema nervoso:",
-                options: ["A) O Moro assimétrico é patognomônico de Kernicterus.", "B) O Reflexo de Colocação (Placing) tem integração cortical e some entre 2-3 meses.", "C) O RTCA persiste fisiologicamente até 1 ano.", "D) A Preensão Plantar desaparece antes da Palmar."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>O Placing é o único reflexo primitivo com integração cortical. O Moro assimétrico indica lesão periférica/fratura."
-            },
-            {
-                category: "Bloco 1: Marcos do Desenvolvimento",
-                question: "Lactente de 4 meses. Não tem mais busca, mantém Moro. Normalidade inclui:",
-                options: ["A) Sustentação da cabeça, pega cubital e gargalhadas.", "B) Sentar sem apoio e falar 'mama'.", "C) Pinça polegar-dedo.", "D) Postura tônica cervical obrigatória."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>4 meses: Sustenta cabeça, Pega voluntária, Ri alto. (Moro pode persistir até 4-6m)."
-            },
-            {
-                category: "Bloco 2: Marcos Motores (Cubos)",
-                question: "Associe a idade à habilidade:<br>1. 18 meses<br>2. 2 anos<br>3. 3 anos<br><br>( ) Torre 3 cubos, chuta bola.<br>( ) Torre 6 cubos, veste-se com supervisão.<br>( ) Torre 2 cubos, anda para trás.",
-                options: ["A) 2, 3, 1.", "B) 1, 2, 3.", "C) 3, 1, 2.", "D) 2, 1, 3."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>18m = Torre 2 cubos (último). 2 anos = Torre 3 cubos (primeiro). 3 anos = Torre 6 cubos (meio)."
-            },
-            {
-                category: "Bloco 2: Linguagem",
-                question: "Criança fala frases com 2 palavras, arremessa bola, brinca com outras crianças e pula com ambos os pés. Idade compatível:",
-                options: ["A) 18 meses.", "B) 24 meses (2 anos).", "C) 2 anos e meio a 3 anos.", "D) 12 meses."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Pular com ambos os pés, frases evoluídas e interação social complexa são marcos de 2,5 a 3 anos."
-            },
-            {
-                category: "Bloco 3: Peso",
-                question: "Lactente nasceu com 3kg. Peso esperado aos 4-5 meses e aos 12 meses:",
-                options: ["A) 4.5kg e 9kg.", "B) 6kg (dobra) e 9kg (triplica).", "C) 6kg e 12kg.", "D) 5kg e 10kg."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>Regra prática: Dobra peso de nascimento no 4º-5º mês. Triplica com 1 ano."
-            },
-            {
-                category: "Bloco 3: Perímetros",
-                question: "Sobre evolução dos perímetros e fontanelas:",
-                options: ["A) Fontanela posterior fecha aos 18 meses.", "B) PT > PC ao nascer.", "C) PC cresce 1cm/mês no 1º ano; PC e PT se igualam entre 6m-1ano.", "D) Fontanela anterior fecha no 1º mês."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Ao nascer PC > PT. Eles se igualam entre 6m e 1 ano. Fontanela anterior fecha entre 9-18m."
-            },
-            {
-                category: "Bloco 4: Umbigo",
-                question: "Queda do coto umbilical > 21 dias sugere:",
-                options: ["A) Onfalite.", "B) Hipotireoidismo Congênito ou defeito de fagócitos.", "C) Doença Hemorrágica.", "D) Hérnia Umbilical."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>Queda tardia (>3 semanas) é sinal clássico de hipotireoidismo congênito ou imunodeficiência."
-            },
-            {
-                category: "Bloco 4: Triagem",
-                question: "Sobre triagem neonatal:",
-                options: ["A) Coraçãozinho antes de 24h.", "B) Orelhinha detecta surdez tardia.", "C) Olhinho detecta catarata/retinoblastoma (antes da alta).", "D) Pezinho no sangue de cordão."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Olhinho (Reflexo Vermelho) deve ser feito na maternidade. Pezinho é entre 3º-5º dia."
-            },
-            {
-                category: "Bloco 4: Visão",
-                question: "Visão 20/40 na Escala de Snellen significa:",
-                options: ["A) Enxerga a 40m o que normal enxerga a 20m.", "B) Enxerga a 20 pés o que o normal vê a 40 pés (visão pior).", "C) Visão acima da média.", "D) Normal para escolares."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>O paciente precisa estar mais perto (20 pés) para ver o que uma pessoa normal veria de mais longe (40 pés)."
-            },
-            {
-                category: "Bloco 5: Vacina HPV",
-                question: "Adolescente de 11 anos nunca vacinado para HPV. Conduta:",
-                options: ["A) 2 doses (0-6m).", "B) Dose única (HPV4).", "C) Sem indicação.", "D) 3 doses."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>O resumo segue a recomendação mais atualizada do Ministério da Saúde: Dose única para 9 a 14 anos."
-            },
-            {
-                category: "Bloco 5: Coadministração",
-                question: "Regra de coadministração de vacinas:",
-                options: ["A) Febre Amarela e Tríplice Viral em < 2 anos exigem intervalo de 30 dias se não simultâneas (evitar simultaneidade).", "B) Inativadas exigem 30 dias.", "C) Atraso de Rotavírus permite vacinar fora do prazo.", "D) VOP nunca com injetáveis."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>A regra mais importante: Em < 2 anos, não se recomenda FA e TV juntas. Deve-se dar intervalo de 30 dias."
-            },
-            {
-                category: "Bloco 5: Vacinas 12 meses",
-                question: "Vacinas de 1 ano (12 meses) segundo o resumo:",
-                options: ["A) Reforço Penta, VIP, Hep A.", "B) Pneumo 10 (reforço), Meningo ACWY, Tríplice Viral.", "C) Febre Amarela e TV.", "D) DTP e Tetraviral."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>12 meses = Três Melhores Presentes: Tríplice Viral, Meningo (ACWY no texto) e Pneumo 10."
-            },
-            {
-                category: "Bloco 6: Aleitamento",
-                question: "Contraindicações absolutas ao aleitamento:",
-                options: ["A) Pega incorreta.", "B) Fissuras.", "C) Galactosemia e HIV materno (Brasil).", "D) Colostro insuficiente."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Galactosemia (doença do bebê) e HIV materno são contraindicações formais."
-            },
-            {
-                category: "Bloco 6: Flúor",
-                question: "Recomendação de pasta de dente:",
-                options: ["A) Sem flúor até 2 anos.", "B) Com flúor desde 1º dente (arroz < 2 anos, ervilha > 2 anos).", "C) Apenas água.", "D) Flúor é proibido."],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br>Usar pasta fluoretada desde o primeiro dente, controlando a quantidade."
-            },
-            {
-                category: "Bloco 6: Introdução Alimentar",
-                question: "Consistência aos 6 meses:",
-                options: ["A) Líquida.", "B) Papinha lisa liquidificada.", "C) Amassada com garfo (papa), sem liquidificar.", "D) Pedaços inteiros."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Não usar liquidificador. Amassar com garfo para estimular mastigação."
-            },
-            {
-                category: "Bloco 7: Sono",
-                question: "Horas de sono: 1. RN, 2. Pré-escolar, 3. Escolar. ( ) 10-12h, ( ) 16-20h, ( ) 9-10h.",
-                options: ["A) 2, 1, 3.", "B) 3, 1, 2.", "C) 2, 3, 1.", "D) 1, 2, 3."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>Pré-escolar (10-12h), RN (16-20h), Escolar (9-10h)."
-            },
-            {
-                category: "Bloco 7: Autismo",
-                question: "M-CHAT-R é indicado para qual idade?",
-                options: ["A) 6 meses.", "B) Após 5 anos.", "C) 16 a 30 meses.", "D) Qualquer idade."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Ferramenta de rastreio de TEA validada para 16 a 30 meses."
-            },
-            {
-                category: "Bloco 7: Família",
-                question: "Pontuação 5 no APGAR de Família indica:",
-                options: ["A) Alta funcionalidade.", "B) Moderada disfunção.", "C) Severa disfunção familiar.", "D) Família perfeita."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>0 a 8 pontos = Severa disfunção familiar."
-            },
-            {
-                category: "Bloco 8: Pele Neonatal",
-                question: "Alterações de pele benignas no RN (sem tratamento):",
-                options: ["A) Eritema tóxico, milium, manchas mongólicas.", "B) Impetigo.", "C) Hemangiomas gigantes.", "D) Icterícia zona 5."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>São achados fisiológicos e transitórios."
-            },
-            {
-                category: "Bloco 8: APGAR",
-                question: "APGAR 1º min = 3 e 5º min = 8. Significado:",
-                options: ["A) Asfixia grave recuperada.", "B) Normalidade.", "C) Asfixia moderada.", "D) Paralisia cerebral."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>0-3 é asfixia grave. >7 é boa adaptação/recuperação."
-            },
-            {
-                category: "Bloco 8: TDAH",
-                question: "Critério obrigatório para TDAH:",
-                options: ["A) Baixo QI.", "B) Antes dos 7 anos.", "C) Sintomas em 2+ ambientes e início antes dos 12 anos.", "D) Resposta a remédio."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Sintomas devem ser invasivos (casa e escola) e surgir antes dos 12 anos (DSM-V)."
-            },
-            {
-                category: "Bloco 8: Oftalmologia",
-                question: "Encaminhar ao oftalmologista no teste de Snellen se:",
-                options: ["A) Visão < 0,7 (20/30) ou diferença de 2 linhas entre olhos.", "B) Lê 20/20.", "C) Visão < 20/100.", "D) Usa óculos."],
-                correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br>Critérios de corte para triagem escolar."
-            },
-            {
-                category: "Bloco 8: Creche",
-                question: "Recomendação ideal para início da creche (imunidade):",
-                options: ["A) 4 meses.", "B) 6 meses.", "C) A partir de 2 anos.", "D) 5 anos."],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br>Devido à maturidade imunológica, recomenda-se esperar até os 2 anos se possível."
-            },
-
-            // --- NOVAS QUESTÕES (26-35) ---
-            {
-                category: "Bloco 8: Reflexos",
-                question: "Sobre o Reflexo de Galant, assinale a alternativa correta quanto ao estímulo, resposta e desaparecimento:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Um recém-nascido a termo apresenta, à ressonância magnética, agenesia de corpo caloso e displasia septo-óptica. Considerando a cronologia do desenvolvimento do sistema nervoso central, o evento insultuoso que culminou nesta malformação ocorreu, mais provavelmente, durante a etapa de:",
                 options: [
-                    "A) Estímulo na planta do pé; resposta de extensão dos dedos; some aos 12 meses.",
-                    "B) Estímulo tátil na região dorsolateral; resposta de encurvamento do tronco ipsilateral; some com 4 a 6 meses.",
-                    "C) Queda súbita da cabeça; resposta de abdução dos braços; some aos 3 meses.",
-                    "D) Rotação da cabeça; resposta de extensão do membro ipsilateral; some aos 6 meses."
-                ],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br><br>O Reflexo de Galant é desencadeado por estímulo tátil na região dorsolateral (costas). A resposta normal é o encurvamento do tronco para o mesmo lado (ipsilateral). Desaparece entre 4 a 6 meses."
-            },
-            {
-                category: "Bloco 8: Crescimento",
-                question: "Qual é a velocidade de crescimento estatural (ganho de altura) esperada, em média, para o primeiro e o segundo ano de vida, respectivamente?",
-                options: [
-                    "A) 15 cm no 1º ano e 10 cm no 2º ano.",
-                    "B) 25 cm no 1º ano e 12 cm no 2º ano.",
-                    "C) 30 cm no 1º ano e 15 cm no 2º ano.",
-                    "D) 10 cm no 1º ano e 5 cm no 2º ano."
-                ],
-                correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br><br>Conforme o resumo: A criança cresce aproximadamente <strong>25 cm</strong> no primeiro ano e desacelera para cerca de <strong>12 cm</strong> no segundo ano."
-            },
-            {
-                category: "Bloco 8: Nutrição (Ferro)",
-                question: "Segundo o material, a suplementação profilática de Ferro deve ser realizada em qual período, quando indicada pelo Ministério da Saúde?",
-                options: [
-                    "A) Do nascimento até 6 meses.",
-                    "B) A partir dos 3 meses até 1 ano.",
-                    "C) A partir dos 6 meses até 24 meses.",
-                    "D) Apenas se houver anemia diagnosticada."
+                    "Neurulação, especificamente no fechamento do neuroporo anterior, por volta do 18º dia.",
+                    "Proliferação neuronal, afetando a multiplicação das células gliais entre a 12ª e 16ª semana.",
+                    "Desenvolvimento prosencefálico, afetando estruturas da linha média entre 4 e 12 semanas.",
+                    "Migração neuronal, impedindo o correto posicionamento cortical entre a 12ª e 20ª semana."
                 ],
                 correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br><br>A recomendação citada é: suplementação profilática de ferro a partir dos <strong>6 meses até 24 meses</strong>."
+                comment: "O PDF especifica que o <strong>Desenvolvimento Prosencefálico</strong> ocorre de 4 a 12 semanas e é responsável pelas estruturas da linha média. Falhas nesta etapa resultam em aprosencefalia, agenesia do corpo caloso e displasia septo-óptica.<br><br><em>Distratores:</em> A neurulação (A) está ligada a defeitos do tubo neural (mieloceles, anencefalia). A proliferação (B) relaciona-se a micro/macrocefalias. A migração (D) relaciona-se a lissencefalias, esquizencefalia e heterotopias."
             },
             {
-                category: "Bloco 8: Vacinas Especiais",
-                question: "A vacina Pneumocócica 23-valente tem uma indicação muito específica citada no texto. Qual é ela?",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Durante a avaliação de um lactente com suspeita de atraso no DNPM, você revisa a fisiologia da plasticidade neural. Sobre os processos de organização e mielinização, assinale a alternativa correta:",
                 options: [
-                    "A) Para todos os idosos acima de 60 anos.",
-                    "B) Para crianças com asma grave.",
-                    "C) Dose única aos 5 anos, somente para povos indígenas.",
-                    "D) Reforço aos 15 meses para todas as crianças."
+                    "A organização neuronal, caracterizada pelo alinhamento e sinapses, encerra-se obrigatoriamente ao nascimento; a plasticidade pós-natal depende exclusivamente da mielinização.",
+                    "A mielinização é um processo que ocorre no sentido caudo-cefálico e distal-proximal, completando-se integralmente aos 2 anos de idade.",
+                    "A hipoplasia da substância branca cerebral é uma consequência direta de falhas na etapa de proliferação neuronal, ocorrendo precocemente na 10ª semana.",
+                    "A mielinização inicia-se na 20ª semana pré-natal e estende-se até a idade adulta (aprox. 20 anos), tendo um pico de avanço nos dois primeiros anos de vida."
                 ],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br><br>O resumo destaca: '5 anos: Vacina pneumocócica 23-valente (1 dose, somente povos indígenas)'."
+                correct: 3,
+                comment: "A mielinização é um processo longo, iniciando na 20ª semana gestacional e indo até a vida adulta, com 'boom' nos 2 primeiros anos.<br><br><em>Distratores:</em> A organização (A) continua anos após o nascimento. A mielinização (B) e o desenvolvimento motor seguem o sentido <strong>céfalo-caudal</strong> e <strong>próximo-distal</strong>. Hipoplasia de substância branca (C) é citada no contexto de falhas de mielinização, não proliferação."
             },
             {
-                category: "Bloco 8: Genograma",
-                question: "Na construção de um Ecomapa ou Genograma, o que representa uma linha sinuosa (ou tortuosa) conectando dois indivíduos ou instituições?",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Assinale a correlação correta entre o período embriológico e a patologia potencial citada no material de referência:",
                 options: [
-                    "A) Relação forte e compensadora.",
-                    "B) Relação distante.",
-                    "C) Relação estressante.",
-                    "D) Rompimento de vínculo."
-                ],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br><br>Simbologia do Ecomapa:<br><ul><li>Linhas contínuas: Vínculos fortes.</li><li>Linhas pontilhadas: Vínculos fracos.</li><li><strong>Linhas sinuosas/tortuosas:</strong> Relações estressantes.</li></ul>"
-            },
-            {
-                category: "Bloco 8: Bullying",
-                question: "Para que uma agressão seja classificada tecnicamente como Bullying, além da intencionalidade e repetição, é necessário haver:",
-                options: [
-                    "A) Agressão física obrigatoriamente.",
-                    "B) Desequilíbrio de poder (físico ou simbólico).",
-                    "C) Ocorrência exclusivamente dentro da escola.",
-                    "D) Envolvimento de pelo menos 3 agressores."
+                    "Neurulação (18 dias): Esquizencefalia.",
+                    "Migração Neuronal (12-20 semanas): Heterotopias e Polimicrogiria.",
+                    "Organização (20 sem - pós-natal): Encefaloceles.",
+                    "Proliferação Neuronal (12-16 semanas): Disrafismos ocultos."
                 ],
                 correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br><br>Definição de Bullying: Violência intencional, repetida e com <strong>desequilíbrio de poder</strong> entre agressor e vítima."
+                comment: "A migração neuronal defeituosa leva a neurônios em locais errados (heterotopias) ou giros anormais (polimicrogiria/esquizencefalia).<br><br><em>Distratores:</em> Esquizencefalia é migração, não neurulação. Encefaloceles são defeitos de fechamento do tubo (neurulação). Disrafismos são neurulação."
             },
             {
-                category: "Bloco 8: Perímetro Cefálico",
-                question: "Quais são as médias esperadas do Perímetro Cefálico (PC) ao nascimento e aos 12 meses, respectivamente?",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "O conceito de desenvolvimento, diferentemente do simples crescimento, envolve aspectos complexos. Na Atenção Primária à Saúde (APS), a vigilância do DNPM justifica-se principalmente porque:",
                 options: [
-                    "A) 33 cm e 45 cm.",
-                    "B) 35 cm e 42 cm.",
-                    "C) 35 cm e 47 cm.",
-                    "D) 38 cm e 50 cm."
-                ],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br><br>Dados do resumo:<br><ul><li>Ao nascer: média de <strong>35 cm</strong>.</li><li>Aos 12 meses: média de <strong>47 cm</strong> (crescimento de 12 cm no ano, sendo 1 cm/mês).</li></ul>"
-            },
-            {
-                category: "Bloco 8: Neonatologia",
-                question: "A 'Golden Hour' (Hora de Ouro) traz diversos benefícios ao recém-nascido. Dentre eles, cita-se:",
-                options: [
-                    "A) Aumento imediato do peso ponderal.",
-                    "B) Facilitação do início da amamentação, liberação de ocitocina e estabilização da temperatura.",
-                    "C) Redução da necessidade de vacina de Hepatite B.",
-                    "D) Eliminação precoce do mecônio em 1 hora."
+                    "O desenvolvimento físico ocorre de forma dissociada do cognitivo, permitindo intervenções focais apenas na motricidade.",
+                    "A plasticidade do sistema nervoso permite que intervenções precoces gerem melhores respostas aos estímulos, prevenindo consequências maiores.",
+                    "A maturação do sistema nervoso é um processo estático e geneticamente determinado, servindo o acompanhamento apenas para fins estatísticos.",
+                    "A detecção de alterações deve ocorrer preferencialmente após os 2 anos, quando o diagnóstico de certeza é possível."
                 ],
                 correct: 1,
-                explanation: "<strong>Gabarito: B</strong><br><br>A Golden Hour (contato pele a pele na 1ª hora) fortalece o vínculo, libera ocitocina (ajuda na descida do leite), facilita a amamentação e <strong>estabiliza a temperatura</strong> do bebê."
+                comment: "O texto enfatiza a 'Melhor resposta aos estímulos e intervenções devido a plasticidade do sistema nervoso' como justificativa para o acompanhamento. O desenvolvimento é indissociável (físico, cognitivo, psicossocial)."
             },
             {
-                category: "Bloco 8: APGAR",
-                question: "No índice de APGAR, o parâmetro 'Gesticulação' (Irritabilidade Reflexa) avalia a resposta ao estímulo. Qual reação pontua 2 (nota máxima) neste item?",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Sobre a etiologia das malformações do SNC listadas no material, a 'Aprosencefalia' é consequência direta de falha em qual etapa:",
                 options: [
-                    "A) Alguma flexão de membros.",
-                    "B) Careta.",
-                    "C) Choro forte, espirro ou tosse.",
-                    "D) Ausência de resposta."
+                    "Formação da placa neural.",
+                    "Desenvolvimento de estruturas da linha média.",
+                    "Elaboração de ramificações dendríticas.",
+                    "Formação da membrana de mielina."
                 ],
-                correct: 2,
-                explanation: "<strong>Gabarito: C</strong><br><br>Pontuação da Gesticulação (Irritabilidade Reflexa):<br><ul><li>Sem resposta = 0</li><li>Careta = 1</li><li><strong>Choro forte / Espirro</strong> = 2</li></ul>"
+                correct: 1,
+                comment: "Aprosencefalia (falta de desenvolvimento do prosencéfalo) é uma falha do desenvolvimento prosencefálico (estruturas da linha média)."
             },
             {
-                category: "Bloco 8: Marcos 18 meses",
-                question: "Aos 18 meses (1 ano e meio), quais são os marcos do desenvolvimento esperados segundo o texto?",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Você examina um lactente de 4 meses e meio cronológicos (nascido a termo). Ao exame neurológico, observa-se: Moro ausente, preensão palmar presente, reflexo tônico-cervical assimétrico (RTCA) persistente e 'obrigatório'. A interpretação correta desses achados é:",
                 options: [
-                    "A) Torre de 2 cubos, usa colher/garfo, fala 3 palavras e anda para trás.",
-                    "B) Torre de 6 cubos e frases completas.",
-                    "C) Pula com os dois pés e veste-se sozinho.",
-                    "D) Pinça polpa-polpa e engatinha."
+                    "O quadro é normal, pois o RTCA só deve desaparecer após o 6º mês de vida.",
+                    "A ausência de Moro aos 4 meses é patológica, sugerindo hipotonia central grave.",
+                    "A persistência do RTCA além dos 3 meses e a preensão palmar (que deveria ter sumido aos 2 meses) indicam atraso no DNPM.",
+                    "A persistência do RTCA além dos 3 meses sugere atraso no DNPM, mas a presença da preensão palmar ainda é aceitável para a idade."
+                ],
+                correct: 3,
+                comment: "Questão difícil que exige decorar as datas limites.<br><ul><li>Moro: Some com 4 a 6 meses. (Ausente aos 4,5 meses é aceitável/normal ou limite, mas não patológico por ausência).</li><li>RTCA (Esgrimista): Some com aprox. 3 meses. Sua persistência > 3 meses indica atraso.</li><li>Preensão Palmar: Some com 5 a 6 meses. Aos 4,5 meses, sua presença é NORMAL.</li></ul>Portanto, o patológico aqui é apenas o RTCA. A alternativa C erra ao dizer que preensão palmar some aos 2 meses."
+            },
+            {
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "O Reflexo de Colocação (Placing) diferencia-se dos demais reflexos arcaicos por uma característica neurofisiológica específica citada no texto. Assinale-a:",
+                options: [
+                    "É o único reflexo que depende exclusivamente da medula espinhal, sem aferência cerebral.",
+                    "É o único reflexo primitivo que possui integração cortical.",
+                    "Sua persistência além do 1º mês é sinal patognomônico de paralisia cerebral.",
+                    "É desencadeado por estímulo auditivo, diferente dos demais que são táteis/proprioceptivos."
+                ],
+                correct: 1,
+                comment: "O texto é explícito: 'É o único reflexo primitivo com integração cortical'. Ele desaparece por volta de 2 a 3 meses."
+            },
+            {
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Em uma consulta de puericultura de um lactente de 9 meses, qual conjunto de marcos do desenvolvimento (Motor, Adaptativo, Social, Linguagem) é o esperado para considerar o desenvolvimento adequado?",
+                options: [
+                    "M: Anda com apoio; A: Torre de 2 cubos; S: Estranhamento; L: Fala 'mama/papa'.",
+                    "M: Senta sem apoio e engatinha; A: Pinça polpa-polpa e solta objetos se retirar; S: Dá tchau/bate palmas; L: Duplica sílabas ('mama', 'papa').",
+                    "M: Senta com apoio (trípode); A: Transfere objetos de mão; S: Sorriso social; L: Lallação.",
+                    "M: Anda para trás; A: Rabisca espontaneamente; S: Brinca com outras crianças; L: Frases de 2 palavras."
+                ],
+                correct: 1,
+                comment: "Baseado na tabela de marcos (9 meses):<br><ul><li>Motor: Engatinha / Senta sem apoio.</li><li>Adaptativo: Pinça polpa-polpa (ou inicia), solta se retirar.</li><li>Social: Tchau, Palmas, Estranhamento (o 'cadê?' costuma ser citado nessa fase ou logo após).</li><li>Linguagem: Duplica sílabas.</li></ul><em>Distratores:</em> A (Torre de 2 cubos é 15-18m), C (Senta com apoio é 6m), D (Anda para trás é 18m)."
+            },
+            {
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Sobre a semiologia dos reflexos e sinais no recém-nascido, a presença de um Reflexo de Moro assimétrico e a ausência do Reflexo de Busca indicam, respectivamente e mais provavelmente:",
+                options: [
+                    "Lesão intracraniana difusa e lesão de plexo braquial.",
+                    "Lesão periférica/ortopédica (ex: fratura de clavícula) e disfunção neurológica grave.",
+                    "Kernicterus e integridade do tronco encefálico.",
+                    "Imaturidade do sistema nervoso e lesão medular alta."
+                ],
+                correct: 1,
+                comment: "<ul><li>Moro Assimétrico: O texto cita 'lesão periférica ou ortopédica' (ex: fratura de clavícula ou lesão de plexo).</li><li>Busca (ou Sucção) Ausente: Sinal de disfunção neurológica grave (exceto em prematuros extremos).</li></ul>"
+            },
+            {
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Analise a evolução da preensão na criança:<br>I. A preensão palmar reflexa desaparece por volta dos 5-6 meses.<br>II. A transferência de objetos de uma mão para outra ocorre tipicamente aos 6 meses.<br>III. A pinça polegar-dedo (movimento de pinça madura/polpa-polpa) é esperada aos 12 meses.<br>IV. A construção de torre de 3 cubos é um marco de 2 anos.<br><br>Estão corretas de acordo com o resumo:",
+                options: [
+                    "Apenas I e II.",
+                    "Apenas I, III e IV.",
+                    "Apenas II e III.",
+                    "Todas as afirmativas."
+                ],
+                correct: 3,
+                comment: "<ul><li>I: Correto (Preensão palmar some 5-6m).</li><li>II: Correto (Transfere objetos: 6 meses na tabela).</li><li>III: Correto (Tabela cita 'Pinça polegar-dedo' aos 12m, embora clinicamente comece aos 9, a tabela coloca pinça polpa-polpa aos 9 e pinça polegar-dedo aos 12, validando a maturação).</li><li>IV: Correto (Torre de 3 cubos: 2 anos. Torre de 2 cubos: 1 ano e meio).</li></ul>"
+            },
+            {
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Um lactente de 9 meses comparece à UBS. O cartão vacinal mostra que ele recebeu todas as vacinas até os 6 meses corretamente (incluindo a dose de Influenza e Covid-19 recomendadas para a idade). Seguindo estritamente o calendário apresentado no resumo e os intervalos mínimos, quais vacinas ele deve receber hoje?",
+                options: [
+                    "Febre Amarela (dose única) e Sarampo (tríplice viral).",
+                    "Febre Amarela (1ª dose) e Covid-19 (3ª dose, se esquema iniciado aos 6m).",
+                    "Meningo C (reforço) e Febre Amarela.",
+                    "Pneumo 10 (reforço) e Covid-19."
+                ],
+                correct: 1,
+                comment: "Consultando o 'macete' do resumo:<br><ul><li>9 meses: Febre Amarela (1ª dose) e Covid-19 (3ª dose - esquema 6m, 7m, 9m).</li></ul><em>Distratores:</em> Tríplice Viral e Pneumo reforço são aos 12 meses. Meningo C reforço é aos 12 meses (Men C ou ACWY dependendo do calendário vigente, o texto cita meningo ACWY aos 12m)."
+            },
+            {
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Em relação à administração simultânea de vacinas (coadministração) e intervalos, considere uma criança de 1 ano e 2 meses que recebeu a vacina Tríplice Viral (SCR) há 15 dias. Hoje, ela precisa receber a vacina contra Febre Amarela (atenuada) e a vacina Pneumocócica 10-valente (inativada). A conduta correta é:",
+                options: [
+                    "Aplicar Pneumocócica hoje e agendar Febre Amarela para daqui a 15 dias.",
+                    "Aplicar ambas hoje, pois vacinas inativadas e atenuadas não interferem entre si.",
+                    "Aplicar Febre Amarela hoje e agendar Pneumocócica para daqui a 15 dias.",
+                    "Agendar ambas para daqui a 15 dias, pois vacinas vivas exigem intervalo de 30 dias para qualquer outra vacina."
                 ],
                 correct: 0,
-                explanation: "<strong>Gabarito: A</strong><br><br>Marcos de 1 ano e meio:<br><ul><li>Motor Fino: Torre com <strong>2 cubos</strong>.</li><li>Motor Grosso: Anda para trás.</li><li>Linguagem: Fala <strong>3 palavras</strong>.</li><li>Adaptativo: Usa colher ou garfo.</li></ul>"
+                comment: "<strong>Regra Atenuada + Atenuada:</strong> Devem ser no mesmo dia OU com intervalo de 30 dias. SCR (atenuada) foi dada há 15 dias. Febre Amarela (atenuada) NÃO pode ser dada hoje. Deve-se esperar completar 30 dias da SCR.<br><strong>Regra Inativada + Atenuada:</strong> Podem ser dadas em qualquer intervalo. Pneumo 10 (inativada) PODE ser dada hoje, independente da SCR anterior."
+            },
+            {
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Sobre a Cadeia de Frio e conservação de imunobiológicos, identifique a afirmativa que viola as normas de segurança descritas:",
+                options: [
+                    "A temperatura padrão de armazenamento na sala de vacina é entre +2°C e +8°C.",
+                    "As vacinas Penta e DTP, por conterem adjuvante de alumínio, nunca devem ser congeladas.",
+                    "A vacina contra Poliomielite Oral (VOP) pode ser armazenada em temperaturas negativas (-15°C a -25°C) nas instâncias estadual e nacional.",
+                    "Caso a vacina VOP descongele, ela pode ser recongelada uma única vez, desde que a temperatura não tenha ultrapassado 8°C."
+                ],
+                correct: 3,
+                comment: "O texto é claro sobre descongelamento de leite materno, mas o princípio biológico geral e normas do PNI (implícitas na rigidez da cadeia de frio) indicam que recongelamento é proibido. Especificamente sobre leite materno o texto diz 'Uma vez descongelado, não pode ser recongelado'. Para vacinas, o congelamento é proibido para as com alumínio. A VOP suporta congelamento na instância superior, mas na sala de vacina fica entre +2 e +8. A alternativa D inventa uma regra de recongelamento inexistente/perigosa."
+            },
+            {
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Uma criança de 4 anos comparece para atualização vacinal. Segundo o calendário do resumo ('Macete'), quais vacinas compõem o reforço dessa idade?",
+                options: [
+                    "DTP, VIP e Varicela.",
+                    "DTP, VOP e Tetraviral.",
+                    "Varicela, DTP e Febre Amarela.",
+                    "Febre Amarela, VIP e Hepatite A."
+                ],
+                correct: 2,
+                comment: "4 anos: 'Vai dormir sem febre' -> Varicela (1 dose) + DTP (2º reforço) + Febre Amarela (1 dose reforço).<br>Obs: A VIP (inativada) ou VOP (atenuada) costumam ser dadas como reforço aos 4 anos no calendário nacional real (VOP), mas o resumo foca no macete: Varicela, DTP, FA. A opção C é a única que contém EXATAMENTE os itens listados no tópico '4 anos' do resumo."
+            },
+            {
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Há uma exceção importante na coadministração de vacinas para crianças menores de 2 anos, visando evitar interferência na resposta imune. Essa exceção envolve o intervalo de 30 dias obrigatório entre:",
+                options: [
+                    "Vacina BCG e Hepatite B.",
+                    "Vacina Febre Amarela e Tríplice Viral.",
+                    "Vacina Rotavírus e VOP.",
+                    "Vacina Varicela e Hepatite A."
+                ],
+                correct: 1,
+                comment: "O texto destaca: 'Exceção: Recomenda-se um intervalo de 30 dias entre a vacina da Febre Amarela e a Tríplice Viral em crianças com menos de 2 anos, salvo em situações de surtos'."
+            },
+            {
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Um prematuro nasceu com 28 semanas de idade gestacional. Atualmente, ele tem 4 meses de idade cronológica. Para avaliar se seu desenvolvimento motor (sustentar a cabeça, por exemplo) está adequado, devemos utilizar a Idade Corrigida. Qual é a idade corrigida desta criança e até quando devemos utilizar esse cálculo?",
+                options: [
+                    "Idade Corrigida: 1 mês. Utilizar até 2 anos de idade.",
+                    "Idade Corrigida: 2 meses. Utilizar até 1 ano de idade.",
+                    "Idade Corrigida: 1 mês. Utilizar até 3 anos de idade para perímetro cefálico.",
+                    "Idade Corrigida: 2 meses e meio. Utilizar até a idade escolar."
+                ],
+                correct: 0,
+                comment: "<strong>Cálculo:</strong> Termo referência (40 sem) - Idade Gestacional (28 sem) = 12 semanas de 'prematuridade' (aprox. 3 meses).<br>Idade Cronológica (4 meses) - Fator de correção (3 meses) = <strong>1 mês</strong> de idade corrigida.<br>Regra: Corrige-se a idade até <strong>2 anos</strong>."
+            },
+            {
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Na avaliação dos reflexos e sinais meníngeos em pediatria, o Sinal de Brudzinski é caracterizado por:",
+                options: [
+                    "Resistência à extensão da perna quando a coxa está fletida sobre a bacia.",
+                    "Flexão involuntária dos membros inferiores quando se realiza a anteflexão passiva da cabeça.",
+                    "Dor à compressão da região occipital.",
+                    "Extensão e abertura dos dedos do pé (em leque) após estímulo plantar."
+                ],
+                correct: 1,
+                comment: "<ul><li><strong>Brudzinski:</strong> Flexão dos MMII à flexão da nuca.</li><li>Kernig: Dor/resistência à extensão da perna com coxa fletida (Alternativa A).</li><li>Babinski: Extensão dos dedos (Alternativa D).</li></ul>"
+            },
+            {
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Analise os dados antropométricos de um lactente de 14 meses. Perímetro Cefálico (PC) = 46 cm; Perímetro Torácico (PT) = 48 cm. Baseado na relação de normalidade descrita no resumo, essa criança:",
+                options: [
+                    "Apresenta microcefalia, pois o PC deveria ser maior que o PT até os 2 anos.",
+                    "Apresenta uma relação normal, pois após 1 ano espera-se que PT > PC.",
+                    "Apresenta desnutrição, evidenciada pelo PT maior que o PC precocemente.",
+                    "Apresenta macrocefalia, pois o PC e PT deveriam se igualar apenas aos 2 anos."
+                ],
+                correct: 1,
+                comment: "<ul><li>Ao nascer: PC > PT.</li><li>6m a 1 ano: PC ≈ PT.</li><li>Após 1 ano: PT > PC.</li></ul>Aos 14 meses (1 ano e 2 meses), é esperado que o tórax seja maior que a cabeça."
+            },
+            {
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Sobre a icterícia neonatal, a utilização das Zonas de Kramer é fundamental para a triagem clínica. Um recém-nascido apresentando icterícia atingindo as Zonas 3 (até joelhos) a 5 (até solas dos pés) requer:",
+                options: [
+                    "Apenas observação e banho de sol, pois a icterícia é fisiológica.",
+                    "Suspensão imediata do aleitamento materno por 24h.",
+                    "Dosagem de bilirrubinas e consideração de fototerapia, devido ao risco de neurotoxicidade.",
+                    "Transfusão sanguínea imediata, independentemente do nível de bilirrubina."
+                ],
+                correct: 2,
+                comment: "O texto diz: 'Zonas 3-5 dosar bilirrubina e considerar fototerapia'. A preocupação é o Kernicterus (impregnação cerebral)."
+            },
+            {
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "No Teste de Apgar, um recém-nascido apresenta no 1º minuto: Cianose de extremidades (Corpo rosado), FC 90 bpm, Alguma flexão de membros, Choro fraco/respiração irregular e Careta à aspiração. Qual a pontuação e a conduta/significado?",
+                options: [
+                    "Apgar 8. Sem asfixia. Cuidados de rotina.",
+                    "Apgar 5. Asfixia moderada. O bebê precisa de ajuda/ressuscitação.",
+                    "Apgar 3. Asfixia grave. Intubação imediata.",
+                    "Apgar 6. Normalidade para o 1º minuto."
+                ],
+                correct: 1,
+                comment: "<strong>Calculando:</strong><br>Cor: Corpo rosa, extremidades azuis (Acrocianose) = 1 ponto.<br>FC: < 100 (90 bpm) = 1 ponto.<br>Tônus: Alguma flexão = 1 ponto.<br>Respiração: Lenta/Irregular = 1 ponto.<br>Irritabilidade: Careta = 1 ponto.<br><strong>Total = 5.</strong><br>Interpretação 4-6: Asfixia Moderada/Deprimido."
+            },
+            {
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Segundo o Guia Alimentar Brasileiro e a classificação NOVA apresentados, qual das opções abaixo contém APENAS alimentos do Grupo 1 (In Natura ou Minimamente Processados)?",
+                options: [
+                    "Leite pasteurizado, farinha de mandioca, carne congelada e ovos.",
+                    "Arroz, feijão, legumes em conserva e frutas frescas.",
+                    "Peixe fresco, óleo de soja, café em pó e macarrão instantâneo.",
+                    "Iogurte natural, queijo minas, pão francês e maçã."
+                ],
+                correct: 0,
+                comment: "Grupo 1: In natura + processos físicos mínimos (limpeza, moagem, pasteurização, congelamento). Leite pasteurizado e farinha entram aqui.<br><em>Distratores:</em> B (Legumes em conserva = Processado, Grupo 3). C (Óleo = Ingrediente Culinário, Grupo 2; Macarrão inst. = Ultraprocessado, Grupo 4). D (Queijo e Pão = Processados, Grupo 3)."
+            },
+            {
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Sobre a introdução alimentar, a consistência dos alimentos deve evoluir para estimular a mastigação e a fala. A recomendação para um lactente de 9 a 11 meses é:",
+                options: [
+                    "Purê ou papinha lisa, 3 refeições ao dia.",
+                    "Alimentos amassados com garfo, mas sem pedaços sólidos, 4 refeições.",
+                    "Alimentos picados (consistência da família), 5 refeições ao dia, incentivando uso das mãos/colher.",
+                    "Alimentação exclusiva da família, sem necessidade de adaptação de corte, 3 refeições principais."
+                ],
+                correct: 2,
+                comment: "<ul><li>6 meses: Papinha lisa/amassada (3 refeições).</li><li>7-8 meses: Amassados com garfo/pequenos pedaços (4 refeições).</li><li><strong>9-11 meses: Picados/consistência da família (5 refeições), incentivar autonomia.</strong></li><li>12-24 meses: Comida da família (3 refeições + 2 lanches).</li></ul>"
+            },
+            {
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Uma mãe precisa retornar ao trabalho e deseja manter o aleitamento materno. Ela ordenha o leite e armazena no freezer (-18°C). Após 10 dias, ela descongela o leite em banho-maria morno, mas o bebê não consome tudo. Qual a conduta correta sobre a validade e o leite restante?",
+                options: [
+                    "O leite no freezer vale por 30 dias; o restante pode ser guardado na geladeira para a próxima mamada.",
+                    "O leite no freezer vale por 15 dias; o leite descongelado não pode ser recongelado e as sobras devem ser descartadas ou usadas imediatamente (não guardar).",
+                    "O leite no freezer vale por 15 dias; o leite descongelado pode ser recongelado uma única vez.",
+                    "O leite deveria ter sido armazenado na porta da geladeira, onde dura 24h."
+                ],
+                correct: 1,
+                comment: "Validade Freezer: 15 dias.<br>Regra de ouro: 'Uma vez descongelado, não pode ser recongelado'.<br>Embora o texto não explicite o descarte imediato da sobra da mamada (foca no recongelamento), a alternativa B é a única que acerta o prazo do freezer (15 dias) e a proibição do recongelamento. A alternativa A erra o prazo (não é 30 dias)."
+            },
+            {
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Identifique a contraindicação ABSOLUTA ao aleitamento materno dentre as opções abaixo:",
+                options: [
+                    "Mastite puerperal em tratamento.",
+                    "Mãe tabagista (menos de 10 cigarros/dia).",
+                    "Galactosemia clássica no recém-nascido.",
+                    "Mãe com Hepatite B."
+                ],
+                correct: 2,
+                comment: "O resumo lista como contraindicações absolutas: Galactosemia clássica, Mães HIV+ (sem TARV adequada/carga viral indetectável - contexto Brasil geralmente contraindica), uso de drogas ilícitas. Hepatite B e Mastite não são contraindicações absolutas (Hepatite B requer vacina/imunoglobulina no bebê)."
+            },
+            {
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Qual é a diferença fundamental entre o método BLW (Baby-Led Weaning) e o BLISS (Baby-Led Introduction to Solids) descrita no material?",
+                options: [
+                    "O BLW utiliza papinhas, enquanto o BLISS usa pedaços.",
+                    "O BLISS é uma variação do BLW que estrutura a oferta para reforçar ferro, densidade energética e segurança (redução de engasgo).",
+                    "O BLW foca na densidade calórica, enquanto o BLISS foca apenas na autonomia motora.",
+                    "Não há diferença, são sinônimos para a mesma técnica de introdução alimentar."
+                ],
+                correct: 1,
+                comment: "O texto define BLISS como 'Variação estruturada do BLW, reforçando ferro, densidade energética e segurança'."
+            },
+            {
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "Sobre os Testes de Triagem Neonatal, correlacione o teste com o melhor momento para sua realização e patologia detectada:",
+                options: [
+                    "Teste do Pezinho: Primeiras 24h de vida; detecta Cardiopatias Congênitas.",
+                    "Teste do Coraçãozinho: Entre 24 e 48h de vida; detecta Cardiopatias Congênitas Críticas via oximetria.",
+                    "Teste da Orelhinha: Após 1 mês de vida; detecta surdez condutiva.",
+                    "Teste do Olhinho: Aos 6 meses; detecta Retinoblastoma e Catarata."
+                ],
+                correct: 1,
+                comment: "<ul><li>Pezinho: 3º a 5º dia (NUNCA <48h).</li><li>Coraçãozinho: 24-48h (Oximetria). Correto.</li><li>Orelhinha: Preferencialmente 24-48h.</li><li>Olhinho: Na maternidade ou 1ª semana.</li></ul>"
+            },
+            {
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "Um adolescente de 12 anos é vítima de bullying na escola. Ao analisar a dinâmica familiar (contexto do agressor e da vítima), o resumo aponta que:",
+                options: [
+                    "O bullying é um fenômeno exclusivamente escolar, sem relação com o estilo parental.",
+                    "Vítimas frequentemente vêm de famílias com mães depressivas ou superprotetoras, enquanto agressores podem vir de famílias autoritárias ou que usam punição física.",
+                    "A renda familiar alta é o principal fator de risco para ser vítima de bullying.",
+                    "A permissividade entre irmãos em casa atua como fator protetor contra o bullying escolar."
+                ],
+                correct: 1,
+                comment: "O texto cita 'Mães depressivas ou superprotetoras podem aumentar a chance de o filho ser vitimizado' e 'Punições físicas severas... negligência, autoritarismo... são grandes riscos' para gerar agressores."
+            },
+            {
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "No Genograma e Ecomapa, símbolos específicos representam a dinâmica das relações. Se você observa uma linha dupla entre dois membros da família ('José' e 'Maria') e uma linha em ziguezague (ou serrilhada) entre 'José' e o 'Trabalho', isso significa, respectivamente:",
+                options: [
+                    "Relação conflituosa e Relação forte.",
+                    "Relação muito estreita/forte e Relação estressante.",
+                    "Relação distante e Relação tênue.",
+                    "Morando junto e Rompimento."
+                ],
+                correct: 1,
+                comment: "<ul><li>Linha dupla (ou grossa): Relação forte/muito estreita.</li><li>Linha ziguezague/sinuosa: Relação estressante/conflituosa.</li></ul>"
+            },
+            {
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "O APGAR de Família é uma ferramenta de screening para disfunção familiar. Uma família que pontua '6' neste instrumento é classificada como:",
+                options: [
+                    "Família funcional (Alta funcionalidade).",
+                    "Moderada disfunção familiar.",
+                    "Severa disfunção familiar.",
+                    "Família em risco social iminente (sem classificação funcional)."
+                ],
+                correct: 2,
+                comment: "<ul><li>13-20: Alta funcionalidade.</li><li>9-12: Moderada disfunção.</li><li><strong>0-8: Severa disfunção.</strong></li></ul>"
+            },
+            {
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "A recomendação atual sobre o tempo de uso de telas para uma criança de 3 anos é:",
+                options: [
+                    "Evitar totalmente.",
+                    "Máximo 1h/dia, sempre supervisionado.",
+                    "Máximo 2h/dia, com conteúdo educativo.",
+                    "Livre, desde que não interfira no sono."
+                ],
+                correct: 1,
+                comment: "<ul><li>< 2 anos: Evitar totalmente.</li><li><strong>2-5 anos: Máximo 1h/dia, supervisionado.</strong></li><li>> 6 anos: Tempo limitado.</li></ul>"
             }
         ];
 
+        // --- Logic ---
         let currentQuestionIndex = 0;
-        let score = { correct: 0, wrong: 0 };
-        
-        const startScreen = document.getElementById('start-screen');
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null); // Stores selected index
+
         const quizContainer = document.getElementById('quiz-container');
-        const resultScreen = document.getElementById('result-screen');
+        const scoreScreen = document.getElementById('score-screen');
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
-        const feedbackPanel = document.getElementById('feedback-panel');
-        const feedbackPlaceholder = document.getElementById('feedback-placeholder');
-        const feedbackHeader = document.getElementById('feedback-header');
-        const explanationText = document.getElementById('explanation-text');
-        const qCategory = document.getElementById('q-category');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackText = document.getElementById('feedback-text');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const nextBtn = document.getElementById('btn-next');
+        const prevBtn = document.getElementById('btn-prev');
         const currentQNum = document.getElementById('current-q-num');
-        const totalQNum = document.getElementById('total-q-num');
         const progressBar = document.getElementById('progress-bar');
+        const blockTag = document.getElementById('question-block');
 
-        function startQuiz() {
-            startScreen.classList.add('hidden');
-            quizContainer.classList.remove('hidden');
-            quizContainer.classList.add('flex');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            const q = questions[currentQuestionIndex];
+        function loadQuestion(index) {
+            const data = quizData[index];
             
-            feedbackPanel.classList.add('hidden');
-            feedbackPanel.classList.remove('flex');
-            if(window.innerWidth >= 1024) {
-                feedbackPlaceholder.classList.remove('hidden');
-                feedbackPlaceholder.classList.add('flex');
-            }
-            
-            optionsContainer.innerHTML = '';
-            questionText.innerHTML = q.question;
-            qCategory.innerText = q.category;
-            currentQNum.innerText = currentQuestionIndex + 1;
-            totalQNum.innerText = questions.length;
-            
-            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            // Update Header Info
+            currentQNum.innerText = index + 1;
+            const progress = ((index) / quizData.length) * 100;
             progressBar.style.width = `${progress}%`;
+            blockTag.innerText = data.block;
 
-            q.options.forEach((opt, index) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 transition-all duration-200 font-medium text-slate-700 group flex items-start gap-3";
+            // Fade Effect
+            quizContainer.classList.remove('fade-in');
+            void quizContainer.offsetWidth; // trigger reflow
+            quizContainer.classList.add('fade-in');
+
+            // Render Question
+            questionText.innerHTML = data.question;
+            
+            // Render Options
+            optionsContainer.innerHTML = '';
+            data.options.forEach((opt, i) => {
+                const btn = document.createElement('div');
+                btn.className = `option-card w-full p-4 border-2 border-slate-200 rounded-xl cursor-pointer text-left mb-2 flex items-start gap-3 ${userAnswers[index] !== null ? 'disabled pointer-events-none' : ''}`;
+                
+                // Option Label (A, B, C...)
+                const letter = String.fromCharCode(65 + i);
+                
                 btn.innerHTML = `
-                    <div class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-indigo-500">
-                        <div class="w-2.5 h-2.5 rounded-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    </div>
-                    <span>${opt}</span>
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-sm border border-slate-300 mt-0.5 option-letter">${letter}</div>
+                    <span class="text-slate-700 font-medium leading-snug">${opt}</span>
                 `;
-                btn.onclick = () => checkAnswer(index, btn);
+
+                btn.onclick = () => checkAnswer(i);
                 optionsContainer.appendChild(btn);
             });
+
+            // Check if already answered
+            if (userAnswers[index] !== null) {
+                revealAnswer(index, false); // Don't animate score if revisiting
+            } else {
+                feedbackContainer.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+            }
+
+            // Button states
+            prevBtn.disabled = index === 0;
         }
 
-        function checkAnswer(selectedIndex, selectedBtn) {
-            const q = questions[currentQuestionIndex];
-            const isCorrect = selectedIndex === q.correct;
+        function checkAnswer(selectedIndex) {
+            if (userAnswers[currentQuestionIndex] !== null) return; // Prevent re-answering
+
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            
+            if (selectedIndex === quizData[currentQuestionIndex].correct) {
+                score++;
+            }
+            
+            revealAnswer(currentQuestionIndex, true);
+        }
+
+        function revealAnswer(index, isNew) {
+            const data = quizData[index];
+            const selected = userAnswers[index];
+            const correct = data.correct;
             const options = optionsContainer.children;
 
-            for (let btn of options) {
-                btn.disabled = true;
-                btn.classList.add('opacity-70', 'cursor-not-allowed');
-                btn.classList.remove('hover:border-indigo-400', 'hover:bg-indigo-50');
+            // Style options
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.add('disabled', 'pointer-events-none'); // Disable interactions
+                const letter = options[i].querySelector('.option-letter');
+
+                if (i === correct) {
+                    options[i].classList.add('option-correct');
+                    options[i].style.borderColor = '#059669';
+                    letter.className = "flex-shrink-0 w-8 h-8 rounded-full bg-green-600 text-white font-bold flex items-center justify-center text-sm mt-0.5";
+                    letter.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (i === selected) {
+                    options[i].classList.add('option-wrong');
+                    letter.className = "flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white font-bold flex items-center justify-center text-sm mt-0.5";
+                    letter.innerHTML = '<i class="fas fa-times"></i>';
+                }
             }
 
-            if (isCorrect) {
-                score.correct++;
-                selectedBtn.classList.remove('border-slate-200', 'opacity-70');
-                selectedBtn.classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-900');
-                selectedBtn.innerHTML = selectedBtn.innerHTML.replace('border-slate-300', 'border-emerald-600').replace('opacity-0', 'opacity-100');
-                
-                feedbackHeader.className = "p-4 bg-emerald-600 text-white font-bold flex items-center gap-2";
-                feedbackHeader.innerHTML = `<i data-lucide="check-circle"></i> Resposta Correta!`;
+            // Show Feedback
+            feedbackContainer.classList.remove('hidden');
+            feedbackText.innerHTML = data.comment;
+
+            if (selected === correct) {
+                feedbackContainer.className = "rounded-xl border-l-8 border-green-500 p-6 mb-8 bg-green-50 shadow-sm fade-in";
+                feedbackTitle.innerText = "Correto!";
+                feedbackTitle.className = "font-bold text-lg text-green-800";
+                feedbackIcon.className = "w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white";
+                feedbackIcon.innerHTML = '<i class="fas fa-check"></i>';
             } else {
-                score.wrong++;
-                selectedBtn.classList.remove('border-slate-200', 'opacity-70');
-                selectedBtn.classList.add('border-red-500', 'bg-red-100', 'text-red-900');
-                selectedBtn.innerHTML = selectedBtn.innerHTML.replace('border-slate-300', 'border-red-600').replace('bg-indigo-500', 'bg-red-500').replace('opacity-0', 'opacity-100');
-
-                const correctBtn = options[q.correct];
-                correctBtn.classList.remove('opacity-70');
-                correctBtn.classList.add('border-emerald-500', 'bg-emerald-50');
-                
-                feedbackHeader.className = "p-4 bg-red-500 text-white font-bold flex items-center gap-2";
-                feedbackHeader.innerHTML = `<i data-lucide="x-circle"></i> Resposta Incorreta`;
+                feedbackContainer.className = "rounded-xl border-l-8 border-red-500 p-6 mb-8 bg-red-50 shadow-sm fade-in";
+                feedbackTitle.innerText = "Incorreto";
+                feedbackTitle.className = "font-bold text-lg text-red-800";
+                feedbackIcon.className = "w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white";
+                feedbackIcon.innerHTML = '<i class="fas fa-times"></i>';
             }
 
-            feedbackPlaceholder.classList.add('hidden');
-            feedbackPlaceholder.classList.remove('flex');
-            feedbackPanel.classList.remove('hidden');
-            feedbackPanel.classList.add('flex', 'fade-in');
-            
-            explanationText.innerHTML = q.explanation;
-            lucide.createIcons();
-
-            if(window.innerWidth < 1024) {
-                feedbackPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Show Next Button
+            nextBtn.classList.remove('hidden');
+            if (index === quizData.length - 1) {
+                nextBtn.innerHTML = 'Ver Resultado <i class="fas fa-chart-bar ml-2"></i>';
+                nextBtn.onclick = showResults;
+            } else {
+                nextBtn.innerHTML = 'Próxima <i class="fas fa-arrow-right ml-2"></i>';
+                nextBtn.onclick = nextQuestion;
             }
         }
 
         function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                showResults();
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
             }
         }
 
         function showResults() {
             quizContainer.classList.add('hidden');
-            quizContainer.classList.remove('flex');
-            resultScreen.classList.remove('hidden');
-            progressBar.style.width = '100%';
+            document.querySelector('footer').classList.add('hidden');
+            scoreScreen.classList.remove('hidden');
 
-            const total = questions.length;
-            const percentage = Math.round((score.correct / total) * 100);
+            document.getElementById('final-correct').innerText = score;
+            document.getElementById('final-wrong').innerText = quizData.length - score;
             
-            document.getElementById('score-correct').innerText = score.correct;
-            document.getElementById('score-wrong').innerText = score.wrong;
+            const percentage = Math.round((score / quizData.length) * 100);
             document.getElementById('final-percentage').innerText = `${percentage}%`;
-
-            const iconContainer = document.getElementById('score-icon-container');
-            if (percentage >= 80) {
-                iconContainer.innerHTML = `<div class="bg-emerald-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto"><i data-lucide="trophy" class="text-emerald-600 w-12 h-12"></i></div>`;
-            } else if (percentage >= 50) {
-                iconContainer.innerHTML = `<div class="bg-yellow-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto"><i data-lucide="thumbs-up" class="text-yellow-600 w-12 h-12"></i></div>`;
-            } else {
-                iconContainer.innerHTML = `<div class="bg-slate-200 w-24 h-24 rounded-full flex items-center justify-center mx-auto"><i data-lucide="book-open" class="text-slate-600 w-12 h-12"></i></div>`;
-            }
             
-            lucide.createIcons();
+            // Update progress bar to full
+            progressBar.style.width = '100%';
         }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers.fill(null);
+            scoreScreen.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            document.querySelector('footer').classList.remove('hidden');
+            loadQuestion(0);
+        }
+
+        // Initialize
+        loadQuestion(0);
+
     </script>
 </body>
 </html>
