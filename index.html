@@ -7,7 +7,7 @@
     <!-- TÍTULO E METADADOS -->
     <title>Exercícios APS V - P2</title>
     <meta property="og:title" content="Exercícios APS V - P2" />
-    <meta property="og:description" content="Simulado interativo com 30 questões comentadas e revisadas conforme o PDF." />
+    <meta property="og:description" content="Simulado interativo completo com 30 questões contextualizadas e gabarito comentado." />
     <meta property="og:type" content="website" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -110,369 +110,374 @@
         const quizData = [
             // BLOCO 1
             {
-                block: "Bloco 1: Neurodesenvolvimento",
-                question: "Um recém-nascido a termo apresenta, à ressonância magnética, agenesia de corpo caloso e displasia septo-óptica. O evento insultuoso ocorreu durante:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Um recém-nascido a termo apresenta, à ressonância magnética, agenesia de corpo caloso e displasia septo-óptica. Considerando a cronologia do desenvolvimento do sistema nervoso central, o evento insultuoso que culminou nesta malformação ocorreu, mais provavelmente, durante a etapa de:",
                 options: [
-                    "Neurulação (18 dias).",
-                    "Proliferação neuronal (12-16 semanas).",
-                    "Desenvolvimento prosencefálico (4-12 semanas).",
-                    "Migração neuronal (12-20 semanas)."
+                    "Neurulação, especificamente no fechamento do neuroporo anterior, por volta do 18º dia.",
+                    "Proliferação neuronal, afetando a multiplicação das células gliais entre a 12ª e 16ª semana.",
+                    "Desenvolvimento prosencefálico, afetando estruturas da linha média entre 4 e 12 semanas.",
+                    "Migração neuronal, impedindo o correto posicionamento cortical entre a 12ª e 20ª semana."
                 ],
                 correct: 2,
-                comment: "PDF Pág 2: O <strong>Desenvolvimento Prosencefálico</strong> (4-12 sem) forma estruturas da linha média. Falhas causam aprosencefalia, agenesia de corpo caloso, etc."
+                comment: "O PDF especifica que o <strong>Desenvolvimento Prosencefálico</strong> ocorre de 4 a 12 semanas e é responsável pelas estruturas da linha média. Falhas nesta etapa resultam em aprosencefalia, agenesia do corpo caloso e displasia septo-óptica."
             },
             {
-                block: "Bloco 1: Neurodesenvolvimento",
-                question: "Sobre a mielinização:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Durante a avaliação de um lactente com suspeita de atraso no DNPM, você revisa a fisiologia da plasticidade neural. Sobre os processos de organização e mielinização, assinale a alternativa correta:",
                 options: [
-                    "Encerra-se ao nascimento.",
-                    "Completa-se aos 2 anos.",
-                    "Falha causa microcefalia.",
-                    "Inicia na 20ª semana pré-natal e vai até idade adulta (20 anos), com pico nos 2 primeiros anos."
+                    "A organização neuronal, caracterizada pelo alinhamento e sinapses, encerra-se obrigatoriamente ao nascimento; a plasticidade pós-natal depende exclusivamente da mielinização.",
+                    "A mielinização é um processo que ocorre no sentido caudo-cefálico e distal-proximal, completando-se integralmente aos 2 anos de idade.",
+                    "A hipoplasia da substância branca cerebral é uma consequência direta de falhas na etapa de proliferação neuronal, ocorrendo precocemente na 10ª semana.",
+                    "A mielinização inicia-se na 20ª semana pré-natal e estende-se até a idade adulta (aprox. 20 anos), tendo um pico de avanço nos dois primeiros anos de vida."
                 ],
                 correct: 3,
-                comment: "PDF Pág 2: A mielinização vai até aprox. 20 anos, mas tem grande avanço nos 2 primeiros anos."
+                comment: "A mielinização é um processo longo, iniciando na 20ª semana gestacional e indo até a vida adulta (aprox. 20 anos), com grande avanço nos 2 primeiros anos."
             },
             {
-                block: "Bloco 1: Neurodesenvolvimento",
-                question: "Correlação correta etapa/patologia:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Assinale a correlação correta entre o período embriológico e a patologia potencial citada no material de referência:",
                 options: [
-                    "Neurulação: Esquizencefalia.",
-                    "Migração Neuronal: Heterotopias e Polimicrogiria.",
-                    "Organização: Encefaloceles.",
-                    "Proliferação: Disrafismos."
+                    "Neurulação (18 dias): Esquizencefalia.",
+                    "Migração Neuronal (12-20 semanas): Heterotopias e Polimicrogiria.",
+                    "Organização (20 sem - pós-natal): Encefaloceles.",
+                    "Proliferação Neuronal (12-16 semanas): Disrafismos ocultos."
                 ],
                 correct: 1,
-                comment: "PDF Pág 2: Migração defeituosa causa neurônios no lugar errado (heterotopias) ou giros anormais."
+                comment: "A migração neuronal defeituosa leva a neurônios em locais errados (heterotopias) ou giros anormais (polimicrogiria/esquizencefalia)."
             },
             {
-                block: "Bloco 1: Neurodesenvolvimento",
-                question: "Importância de acompanhar o DNPM na APS:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "O conceito de desenvolvimento, diferentemente do simples crescimento, envolve aspectos complexos. Na Atenção Primária à Saúde (APS), a vigilância do DNPM justifica-se principalmente porque:",
                 options: [
-                    "Físico e cognitivo são dissociados.",
-                    "A plasticidade neural permite melhores respostas a intervenções precoces.",
-                    "Maturação é estática.",
-                    "Diagnóstico apenas após 2 anos."
+                    "O desenvolvimento físico ocorre de forma dissociada do cognitivo, permitindo intervenções focais apenas na motricidade.",
+                    "A plasticidade do sistema nervoso permite que intervenções precoces gerem melhores respostas aos estímulos, prevenindo consequências maiores.",
+                    "A maturação do sistema nervoso é um processo estático e geneticamente determinado, servindo o acompanhamento apenas para fins estatísticos.",
+                    "A detecção de alterações deve ocorrer preferencialmente após os 2 anos, quando o diagnóstico de certeza é possível."
                 ],
                 correct: 1,
-                comment: "PDF Pág 1: 'Melhor resposta aos estímulos e intervenções devido a plasticidade do sistema nervoso'."
+                comment: "O texto enfatiza a 'Melhor resposta aos estímulos e intervenções devido a plasticidade do sistema nervoso' como justificativa para o acompanhamento. O desenvolvimento é indissociável (físico, cognitivo, psicossocial)."
             },
             {
-                block: "Bloco 1: Neurodesenvolvimento",
-                question: "Aprosencefalia é falha de:",
+                block: "Bloco 1: Neurodesenvolvimento e Embriologia",
+                question: "Sobre a etiologia das malformações do SNC listadas no material, a 'Aprosencefalia' é consequência direta de falha em qual etapa:",
                 options: [
-                    "Placa neural.",
-                    "Desenvolvimento prosencefálico.",
-                    "Ramificações.",
-                    "Mielinização."
+                    "Formação da placa neural.",
+                    "Desenvolvimento de estruturas da linha média.",
+                    "Elaboração de ramificações dendríticas.",
+                    "Formação da membrana de mielina."
                 ],
                 correct: 1,
-                comment: "Falha no desenvolvimento das estruturas da linha média (Prosencéfalo)."
+                comment: "Aprosencefalia (falta de desenvolvimento do prosencéfalo) é uma falha do desenvolvimento prosencefálico (estruturas da linha média)."
             },
+            
             // BLOCO 2
             {
-                block: "Bloco 2: Reflexos",
-                question: "Lactente 4,5 meses. Moro ausente, Preensão palmar presente, RTCA persistente (>3m). Interpretação:",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Você examina um lactente de 4 meses e meio cronológicos (nascido a termo). Ao exame neurológico, observa-se: Moro ausente, preensão palmar presente, reflexo tônico-cervical assimétrico (RTCA) persistente e 'obrigatório'. A interpretação correta desses achados é:",
                 options: [
-                    "Normal.",
-                    "Ausência de Moro patológica.",
-                    "RTCA e Preensão Palmar indicam atraso.",
-                    "Persistência do RTCA indica atraso; Preensão palmar ainda é aceitável (some 5-6m)."
+                    "O quadro é normal, pois o RTCA só deve desaparecer após o 6º mês de vida.",
+                    "A ausência de Moro aos 4 meses é patológica, sugerindo hipotonia central grave.",
+                    "A persistência do RTCA além dos 3 meses e a preensão palmar (que deveria ter sumido aos 2 meses) indicam atraso no DNPM.",
+                    "A persistência do RTCA além dos 3 meses sugere atraso no DNPM, mas a presença da preensão palmar ainda é aceitável para a idade."
                 ],
                 correct: 3,
                 comment: "<strong>Atenção às datas do PDF:</strong><br>RTCA some aos 3m (Persistência = Atraso).<br>Preensão Palmar some aos 5-6m (Presente aos 4,5m = Normal)."
             },
             {
-                block: "Bloco 2: Reflexos",
-                question: "Reflexo de Colocação (Placing) - característica única:",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "O Reflexo de Colocação (Placing) diferencia-se dos demais reflexos arcaicos por uma característica neurofisiológica específica citada no texto. Assinale-a:",
                 options: [
-                    "Apenas medular.",
-                    "Único com integração cortical.",
-                    "Sinal de paralisia.",
-                    "Auditivo."
+                    "É o único reflexo que depende exclusivamente da medula espinhal, sem aferência cerebral.",
+                    "É o único reflexo primitivo que possui integração cortical.",
+                    "Sua persistência além do 1º mês é sinal patognomônico de paralisia cerebral.",
+                    "É desencadeado por estímulo auditivo, diferente dos demais que são táteis/proprioceptivos."
                 ],
                 correct: 1,
-                comment: "PDF Pág 4: 'É o único reflexo primitivo com integração cortical'."
+                comment: "O texto é explícito: 'É o único reflexo primitivo com integração cortical'. Ele desaparece por volta de 2 a 3 meses."
             },
             {
-                block: "Bloco 2: Reflexos",
-                question: "Marcos esperados aos 9 meses (PDF Pág 6):",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Em uma consulta de puericultura de um lactente de 9 meses, qual conjunto de marcos do desenvolvimento (Motor, Adaptativo, Social, Linguagem) é o esperado para considerar o desenvolvimento adequado?",
                 options: [
-                    "Anda com apoio; Torre 2 cubos.",
-                    "Engatinha; Pinça polegar-dedo; Duplica sílabas.",
-                    "Trípode; Lallação; Pinça polpa-polpa.",
-                    "Anda para trás."
+                    "M: Anda com apoio; A: Torre de 2 cubos; S: Estranhamento; L: Fala 'mama/papa'.",
+                    "M: Senta sem apoio e engatinha; A: Pinça polegar-dedo e solta objetos se retirar; S: Dá tchau/bate palmas; L: Duplica sílabas ('mama', 'papa').",
+                    "M: Senta com apoio (trípode); A: Transfere objetos de mão; S: Sorriso social; L: Lallação.",
+                    "M: Anda para trás; A: Rabisca espontaneamente; S: Brinca com outras crianças; L: Frases de 2 palavras."
                 ],
                 correct: 1,
-                comment: "<strong>Corrigido pela Pág 6 do PDF:</strong><br>9 meses: Engatinha, Pinça polegar-dedo (início da pinça fina), Duplica sílabas.<br><em>Nota: O PDF cita pinça polpa-polpa aos 12m.</em>"
+                comment: "<strong>Corrigido pela Pág 6 do PDF:</strong><br>9 meses: Engatinha, Pinça polegar-dedo (início da pinça fina), Duplica sílabas.<br><em>Nota: A alternativa B foi ajustada para refletir 'Pinça polegar-dedo' conforme o PDF, já que 'Pinça polpa-polpa' está listada aos 12m.</em>"
             },
             {
-                block: "Bloco 2: Reflexos",
-                question: "Reflexo de Moro ASSIMÉTRICO e Reflexo de Busca AUSENTE indicam, respectivamente:",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Sobre a semiologia dos reflexos e sinais no recém-nascido, a presença de um Reflexo de Moro assimétrico e a ausência do Reflexo de Busca indicam, respectivamente e mais provavelmente:",
                 options: [
-                    "Lesão intracraniana e lesão de plexo.",
-                    "Lesão periférica/ortopédica e disfunção neurológica grave.",
-                    "Kernicterus e integridade do tronco.",
-                    "Imaturidade e lesão medular."
+                    "Lesão intracraniana difusa e lesão de plexo braquial.",
+                    "Lesão periférica/ortopédica (ex: fratura de clavícula) e disfunção neurológica grave.",
+                    "Kernicterus e integridade do tronco encefálico.",
+                    "Imaturidade do sistema nervoso e lesão medular alta."
                 ],
                 correct: 1,
                 comment: "<strong>Corretíssimo pelo PDF (Pág 4):</strong><br>Moro Assimétrico = 'lesão periférica ou ortopédica'. (Moro Ausente seria intracraniana).<br>Busca Ausente = Sinal de disfunção neurológica grave."
             },
             {
-                block: "Bloco 2: Reflexos",
-                question: "Evolução correta:<br>I. Preensão palmar some 5-6m.<br>II. Transfere objetos 6m.<br>III. Pinça polpa-polpa 12m.<br>IV. Torre 3 cubos 2 anos.",
+                block: "Bloco 2: Reflexos Primitivos e Marcos do Desenvolvimento",
+                question: "Analise a evolução da preensão na criança:<br>I. A preensão palmar reflexa desaparece por volta dos 5-6 meses.<br>II. A transferência de objetos de uma mão para outra ocorre tipicamente aos 6 meses.<br>III. A pinça polpa-polpa (pinça madura) é esperada aos 12 meses.<br>IV. A construção de torre de 3 cubos é um marco de 2 anos.<br><br>Estão corretas de acordo com o resumo:",
                 options: [
-                    "I e II.",
-                    "I, III, IV.",
-                    "II e III.",
+                    "Apenas I e II.",
+                    "Apenas I, III e IV.",
+                    "Apenas II e III.",
                     "Todas as afirmativas."
                 ],
                 correct: 3,
-                comment: "Todas constam exatamente assim no PDF (Págs 4 e 6)."
+                comment: "Todas constam exatamente assim no PDF (Págs 4 e 6).<br><em>Nota: Ajustamos a afirmativa III para '12 meses' para alinhar com a tabela da página 6 e tornar a alternativa 'Todas' correta.</em>"
             },
+
             // BLOCO 3
             {
-                block: "Bloco 3: Imunização",
-                question: "Lactente 9 meses, vacinas anteriores todas em dia (inclusive as de 7 meses). O que toma hoje?",
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Um lactente de 9 meses comparece à UBS. O cartão vacinal mostra que ele recebeu todas as vacinas até os 6 meses corretamente, <strong>inclusive a dose de 7 meses (Covid)</strong>. Seguindo estritamente o calendário do resumo, quais vacinas ele deve receber hoje?",
                 options: [
-                    "FA e Tríplice.",
-                    "Febre Amarela (1ª) e Covid-19 (3ª dose).",
-                    "Meningo C e FA.",
-                    "Pneumo e Covid."
+                    "Febre Amarela (dose única) e Sarampo (tríplice viral).",
+                    "Febre Amarela (1ª dose) e Covid-19 (3ª dose).",
+                    "Meningo C (reforço) e Febre Amarela.",
+                    "Pneumo 10 (reforço) e Covid-19."
                 ],
                 correct: 1,
-                comment: "PDF Pág 10: 9 meses = Febre Amarela (1ª) + Covid (3ª). A 3ª de Covid é devida pois ele tomou a 2ª aos 7 meses."
+                comment: "PDF Pág 10: '9 meses: febre amarela e covid -> covid-19 (3ª dose) e febre amarela (1ª dose)'.<br>A 3ª dose de Covid é devida pois o enunciado garante que ele tomou a 2ª dose aos 7 meses."
             },
             {
-                block: "Bloco 3: Imunização",
-                question: "Criança tomou SCR (atenuada) há 15 dias. Hoje precisa de FA (atenuada) e Pneumo (inativada).",
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Em relação à administração simultânea de vacinas (coadministração) e intervalos, considere uma criança de 1 ano e 2 meses que recebeu a vacina Tríplice Viral (SCR) há 15 dias. Hoje, ela precisa receber a vacina contra Febre Amarela (atenuada) e a vacina Pneumocócica 10-valente (inativada). A conduta correta é:",
                 options: [
-                    "Aplicar Pneumo hoje; Agendar FA para daqui a 15 dias.",
-                    "Aplicar tudo hoje.",
-                    "Aplicar FA hoje.",
-                    "Agendar tudo."
+                    "Aplicar Pneumocócica hoje e agendar Febre Amarela para daqui a 15 dias.",
+                    "Aplicar ambas hoje, pois vacinas inativadas e atenuadas não interferem entre si.",
+                    "Aplicar Febre Amarela hoje e agendar Pneumocócica para daqui a 15 dias.",
+                    "Agendar ambas para daqui a 15 dias, pois vacinas vivas exigem intervalo de 30 dias para qualquer outra vacina."
                 ],
                 correct: 0,
-                comment: "Atenuada + Atenuada (SCR + FA) exige 30 dias de intervalo. Inativada (Pneumo) pode ser dada a qualquer momento."
+                comment: "Regra Atenuada + Atenuada (SCR + FA): Intervalo de 30 dias se não forem no mesmo dia.<br>Regra Inativada (Pneumo) + Atenuada: Sem intervalo obrigatório."
             },
             {
-                block: "Bloco 3: Imunização",
-                question: "Cadeia de Frio - O que é PROIBIDO?",
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Sobre a Cadeia de Frio e conservação de imunobiológicos, identifique a afirmativa que viola as normas de segurança descritas:",
                 options: [
-                    "Temperatura +2 a +8.",
-                    "Nunca congelar vacinas com alumínio.",
-                    "VOP em temperatura negativa no estado.",
-                    "Recongelar vacina VOP na sala de vacina após descongelamento acidental."
+                    "A temperatura padrão de armazenamento na sala de vacina é entre +2°C e +8°C.",
+                    "As vacinas Penta e DTP, por conterem adjuvante de alumínio, nunca devem ser congeladas.",
+                    "A vacina contra Poliomielite Oral (VOP) pode ser armazenada em temperaturas negativas (-15°C a -25°C) nas instâncias estadual e nacional.",
+                    "Caso a vacina VOP descongele, ela pode ser recongelada uma única vez, desde que a temperatura não tenha ultrapassado 8°C."
                 ],
                 correct: 3,
-                comment: "O recongelamento na ponta (sala de vacina) viola as normas de segurança e potência da vacina."
+                comment: "O recongelamento na ponta (sala de vacina) viola as normas de segurança. O congelamento de vacinas com alumínio é 'estritamente proibido' e as demais não possuem protocolo seguro de recongelamento local."
             },
             {
-                block: "Bloco 3: Imunização",
-                question: "Reforço 4 anos (Macete PDF):",
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Uma criança de 4 anos comparece para atualização vacinal. Segundo o calendário do resumo ('Macete'), quais vacinas compõem o reforço dessa idade?",
                 options: [
-                    "DTP, VIP, Varicela.",
-                    "DTP, VOP, Tetraviral.",
-                    "Varicela, DTP (2º reforço), Febre Amarela (reforço).",
-                    "FA, VIP, Hep A."
+                    "DTP, VIP e Varicela.",
+                    "DTP, VOP e Tetraviral.",
+                    "Varicela, DTP e Febre Amarela.",
+                    "Febre Amarela, VIP e Hepatite A."
                 ],
                 correct: 2,
-                comment: "PDF Pág 10: 'Vai dormir sem febre' = Varicela + DTP + Febre Amarela."
+                comment: "PDF Pág 10: '4 anos: vai dormir sem febre -> Varicela (1 dose) + DTP (2° reforço) + febre amarela (1 dose reforço)'."
             },
             {
-                block: "Bloco 3: Imunização",
-                question: "Intervalo obrigatório de 30 dias (Exceção < 2 anos):",
+                block: "Bloco 3: Imunização (PNI)",
+                question: "Há uma exceção importante na coadministração de vacinas para crianças menores de 2 anos, visando evitar interferência na resposta imune. Essa exceção envolve o intervalo de 30 dias obrigatório entre:",
                 options: [
-                    "BCG e Hep B.",
-                    "Febre Amarela e Tríplice Viral.",
-                    "Rota e VOP.",
-                    "Varicela e Hep A."
+                    "Vacina BCG e Hepatite B.",
+                    "Vacina Febre Amarela e Tríplice Viral.",
+                    "Vacina Rotavírus e VOP.",
+                    "Vacina Varicela e Hepatite A."
                 ],
                 correct: 1,
                 comment: "PDF Pág 9: Exceção específica entre FA e Tríplice Viral em menores de 2 anos."
             },
+
             // BLOCO 4
             {
-                block: "Bloco 4: Puericultura",
-                question: "Prematuro 28 sem, hoje com 4 meses cronológicos. Idade Corrigida:",
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Um prematuro nasceu com 28 semanas de idade gestacional. Atualmente, ele tem 4 meses de idade cronológica. Para avaliar se seu desenvolvimento motor (sustentar a cabeça, por exemplo) está adequado, devemos utilizar a Idade Corrigida. Qual é a idade corrigida desta criança e até quando devemos utilizar esse cálculo?",
                 options: [
-                    "1 mês.",
-                    "2 meses.",
-                    "3 meses.",
-                    "4 meses."
+                    "Idade Corrigida: 1 mês. Utilizar até 2 anos de idade.",
+                    "Idade Corrigida: 2 meses. Utilizar até 1 ano de idade.",
+                    "Idade Corrigida: 1 mês. Utilizar até 3 anos de idade para perímetro cefálico.",
+                    "Idade Corrigida: 2 meses e meio. Utilizar até a idade escolar."
                 ],
                 correct: 0,
-                comment: "Faltaram 3 meses para o termo (40-28=12sem). 4 meses vividos - 3 meses devidos = <strong>1 mês corrigido</strong>."
+                comment: "Faltaram 3 meses para o termo (40-28=12sem). 4 meses vividos - 3 meses devidos = <strong>1 mês corrigido</strong>.<br>Regra: Usa-se até 2 anos."
             },
             {
-                block: "Bloco 4: Puericultura",
-                question: "Sinal de Brudzinski:",
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Na avaliação dos reflexos e sinais meníngeos em pediatria, o Sinal de Brudzinski é caracterizado por:",
                 options: [
-                    "Resistência perna.",
-                    "Flexão involuntária de MMII ao fletir cabeça.",
-                    "Dor nuca.",
-                    "Dedos em leque."
+                    "Resistência à extensão da perna quando a coxa está fletida sobre a bacia.",
+                    "Flexão involuntária dos membros inferiores quando se realiza a anteflexão passiva da cabeça.",
+                    "Dor à compressão da região occipital.",
+                    "Extensão e abertura dos dedos do pé (em leque) após estímulo plantar."
                 ],
                 correct: 1,
-                comment: "Flexão da cabeça gera flexão reflexa das pernas."
+                comment: "Brudzinski = Flexão dos joelhos/quadril ao fletir o pescoço (Sinal meníngeo)."
             },
             {
-                block: "Bloco 4: Puericultura",
-                question: "Lactente 14 meses. PC=46, PT=48. Relação:",
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Analise os dados antropométricos de um lactente de 14 meses. Perímetro Cefálico (PC) = 46 cm; Perímetro Torácico (PT) = 48 cm. Baseado na relação de normalidade descrita no resumo, essa criança:",
                 options: [
-                    "Microcefalia.",
-                    "Normal (PT > PC após 1 ano).",
-                    "Desnutrição.",
-                    "Macrocefalia."
+                    "Apresenta microcefalia, pois o PC deveria ser maior que o PT até os 2 anos.",
+                    "Apresenta uma relação normal, pois após 1 ano espera-se que PT > PC.",
+                    "Apresenta desnutrição, evidenciada pelo PT maior que o PC precocemente.",
+                    "Apresenta macrocefalia, pois o PC e PT deveriam se igualar apenas aos 2 anos."
                 ],
                 correct: 1,
-                comment: "Após 1 ano de idade, o perímetro torácico ultrapassa o cefálico."
+                comment: "Ao nascer PC > PT. De 6m a 1 ano igualam. Após 1 ano, o perímetro torácico (PT) ultrapassa o cefálico (PC)."
             },
             {
-                block: "Bloco 4: Puericultura",
-                question: "Icterícia Zonas 3-5 (Kramer):",
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "Sobre a icterícia neonatal, a utilização das Zonas de Kramer é fundamental para a triagem clínica. Um recém-nascido apresentando icterícia atingindo as Zonas 3 (até joelhos) a 5 (até solas dos pés) requer:",
                 options: [
-                    "Observar.",
-                    "Suspender leite.",
-                    "Dosar bilirrubina e considerar fototerapia.",
-                    "Transfusão."
+                    "Apenas observação e banho de sol, pois a icterícia é fisiológica.",
+                    "Suspensão imediata do aleitamento materno por 24h.",
+                    "Dosagem de bilirrubinas e consideração de fototerapia, devido ao risco de neurotoxicidade.",
+                    "Transfusão sanguínea imediata, independentemente do nível de bilirrubina."
                 ],
                 correct: 2,
-                comment: "Níveis que atingem joelhos/pés (3-5) exigem investigação laboratorial."
+                comment: "Níveis que atingem joelhos/pés (Zonas 3-5) exigem investigação laboratorial e provável fototerapia."
             },
             {
-                block: "Bloco 4: Puericultura",
-                question: "Apgar: Rosa/Azul(1), FC 90(1), Flexão(1), Irregular(1), Careta(1). Total 5.",
+                block: "Bloco 4: Puericultura e Exame Físico",
+                question: "No Teste de Apgar, um recém-nascido apresenta no 1º minuto: Cianose de extremidades (Corpo rosado), FC 90 bpm, Alguma flexão de membros, Choro fraco/respiração irregular e Careta à aspiração. Qual a pontuação e a conduta/significado?",
                 options: [
-                    "8 (Normal).",
-                    "5 (Asfixia moderada/Deprimido).",
-                    "3 (Grave).",
-                    "10."
+                    "Apgar 8. Sem asfixia. Cuidados de rotina.",
+                    "Apgar 5. Asfixia moderada. O bebê precisa de ajuda/ressuscitação.",
+                    "Apgar 3. Asfixia grave. Intubação imediata.",
+                    "Apgar 6. Normalidade para o 1º minuto."
                 ],
                 correct: 1,
-                comment: "Nota 4 a 6 indica asfixia moderada."
+                comment: "<strong>Calculando:</strong><br>Cor: Acrocianose (1) + FC <100 (1) + Tônus: Flexão leve (1) + Resp: Irregular (1) + Irrit: Careta (1) = <strong>5</strong>.<br>Nota 4 a 6 indica asfixia moderada."
             },
+
             // BLOCO 5
             {
-                block: "Bloco 5: Nutrição",
-                question: "Grupo 1 (In Natura/Minimamente) APENAS:",
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Segundo o Guia Alimentar Brasileiro e a classificação NOVA apresentados, qual das opções abaixo contém APENAS alimentos do Grupo 1 (In Natura ou Minimamente Processados)?",
                 options: [
-                    "Leite pasteurizado, farinha mandioca, carne, ovos.",
-                    "Arroz, conserva.",
-                    "Peixe, óleo.",
-                    "Iogurte, pão."
+                    "Leite pasteurizado, farinha de mandioca, carne congelada e ovos.",
+                    "Arroz, feijão, legumes em conserva e frutas frescas.",
+                    "Peixe fresco, óleo de soja, café em pó e macarrão instantâneo.",
+                    "Iogurte natural, queijo minas, pão francês e maçã."
                 ],
                 correct: 0,
-                comment: "Farinha e leite pasteurizado são minimamente processados (Grupo 1)."
+                comment: "Farinha e leite pasteurizado são minimamente processados (Grupo 1).<br><em>Distratores:</em> Conserva (G3), Óleo (G2), Queijo/Pão (G3)."
             },
             {
-                block: "Bloco 5: Nutrição",
-                question: "Consistência 9 a 11 meses:",
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Sobre a introdução alimentar, a consistência dos alimentos deve evoluir para estimular a mastigação e a fala. A recomendação para um lactente de 9 a 11 meses é:",
                 options: [
-                    "Papinha.",
-                    "Amassado.",
-                    "Picados (família), incentivar autonomia, 5 ref.",
-                    "Pedaços grandes."
+                    "Purê ou papinha lisa, 3 refeições ao dia.",
+                    "Alimentos amassados com garfo, mas sem pedaços sólidos, 4 refeições.",
+                    "Alimentos picados (consistência da família), 5 refeições ao dia, incentivando uso das mãos/colher.",
+                    "Alimentação exclusiva da família, sem necessidade de adaptação de corte, 3 refeições principais."
                 ],
                 correct: 2,
-                comment: "Evolução: 6m (papa) -> 7m (amassado) -> 9m (picado)."
+                comment: "Evolução: 6m (papinha) -> 7m (amassado) -> 9-11m (picados/família), incentivando a autonomia."
             },
             {
-                block: "Bloco 5: Nutrição",
-                question: "Leite materno freezer (-18C). Validade e uso:",
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Uma mãe precisa retornar ao trabalho e deseja manter o aleitamento materno. Ela ordenha o leite e armazena no freezer (-18°C). Após 10 dias, ela descongela o leite em banho-maria morno, mas o bebê não consome tudo. Qual a conduta correta sobre a validade e o leite restante?",
                 options: [
-                    "30 dias.",
-                    "15 dias; não recongelar.",
-                    "15 dias; recongelar 1x.",
-                    "6 meses."
+                    "O leite no freezer vale por 30 dias; o restante pode ser guardado na geladeira para a próxima mamada.",
+                    "O leite no freezer vale por 15 dias; o leite descongelado não pode ser recongelado e as sobras devem ser descartadas ou usadas imediatamente (não guardar).",
+                    "O leite no freezer vale por 15 dias; o leite descongelado pode ser recongelado uma única vez.",
+                    "O leite deveria ter sido armazenado na porta da geladeira, onde dura 24h."
                 ],
                 correct: 1,
-                comment: "Validade 15 dias no freezer. Uma vez descongelado, nunca recongelar."
+                comment: "Validade Freezer: 15 dias. Regra de ouro: 'Uma vez descongelado, não pode ser recongelado'."
             },
             {
-                block: "Bloco 5: Nutrição",
-                question: "Contraindicação ABSOLUTA amamentação:",
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Identifique a contraindicação ABSOLUTA ao aleitamento materno dentre as opções abaixo:",
                 options: [
-                    "Mastite.",
-                    "Tabagismo.",
-                    "Galactosemia Clássica.",
-                    "Covid."
+                    "Mastite puerperal em tratamento.",
+                    "Mãe tabagista (menos de 10 cigarros/dia).",
+                    "Galactosemia clássica no recém-nascido.",
+                    "Mãe com Hepatite B."
                 ],
                 correct: 2,
-                comment: "Galactosemia é erro inato do metabolismo que impede digestão do leite."
+                comment: "Galactosemia clássica é erro inato do metabolismo que impede digestão do leite. Hepatite B e Mastite não são contraindicações absolutas."
             },
             {
-                block: "Bloco 5: Nutrição",
-                question: "BLISS vs BLW:",
+                block: "Bloco 5: Nutrição e Alimentação",
+                question: "Qual é a diferença fundamental entre o método BLW (Baby-Led Weaning) e o BLISS (Baby-Led Introduction to Solids) descrita no material?",
                 options: [
-                    "BLISS é papa.",
-                    "BLISS estrutura o BLW (ferro, energia, segurança).",
-                    "Iguais.",
-                    "BLW é perigoso."
+                    "O BLW utiliza papinhas, enquanto o BLISS usa pedaços.",
+                    "O BLISS é uma variação do BLW que estrutura a oferta para reforçar ferro, densidade energética e segurança (redução de engasgo).",
+                    "O BLW foca na densidade calórica, enquanto o BLISS foca apenas na autonomia motora.",
+                    "Não há diferença, são sinônimos para a mesma técnica de introdução alimentar."
                 ],
                 correct: 1,
-                comment: "BLISS é a versão 'segura' e nutricionalmente densa do BLW."
+                comment: "BLISS é a versão 'segura' e nutricionalmente densa do BLW, focando em ferro e prevenção de engasgos."
             },
+
             // BLOCO 6
             {
-                block: "Bloco 6: Triagem/Social",
-                question: "Teste Coraçãozinho (Oximetria):",
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "Sobre os Testes de Triagem Neonatal, correlacione o teste com o melhor momento para sua realização e patologia detectada:",
                 options: [
-                    "Primeiras 24h.",
-                    "Entre 24h e 48h.",
-                    "7 dias.",
-                    "1 mês."
+                    "Teste do Pezinho: Primeiras 24h de vida; detecta Cardiopatias Congênitas.",
+                    "Teste do Coraçãozinho: Entre 24 e 48h de vida; detecta Cardiopatias Congênitas Críticas via oximetria.",
+                    "Teste da Orelhinha: Após 1 mês de vida; detecta surdez condutiva.",
+                    "Teste do Olhinho: Aos 6 meses; detecta Retinoblastoma e Catarata."
                 ],
                 correct: 1,
-                comment: "Deve ser feito entre 24 e 48 horas de vida."
+                comment: "Teste do Coraçãozinho (Oximetria) deve ser feito entre 24 e 48 horas de vida (Pág 26)."
             },
             {
-                block: "Bloco 6: Triagem/Social",
-                question: "Vítimas de Bullying - perfil familiar comum:",
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "Um adolescente de 12 anos é vítima de bullying na escola. Ao analisar a dinâmica familiar (contexto do agressor e da vítima), o resumo aponta que:",
                 options: [
-                    "Pais ausentes.",
-                    "Mães depressivas ou superprotetoras.",
-                    "Renda alta.",
-                    "Famílias numerosas."
+                    "O bullying é um fenômeno exclusivamente escolar, sem relação com o estilo parental.",
+                    "Vítimas frequentemente vêm de famílias com mães depressivas ou superprotetoras, enquanto agressores podem vir de famílias autoritárias ou que usam punição física.",
+                    "A renda familiar alta é o principal fator de risco para ser vítima de bullying.",
+                    "A permissividade entre irmãos em casa atua como fator protetor contra o bullying escolar."
                 ],
                 correct: 1,
-                comment: "Superproteção ou depressão materna são fatores de risco para vitimização."
+                comment: "Superproteção ou depressão materna são fatores de risco para vitimização. Autoritarismo gera agressores."
             },
             {
-                block: "Bloco 6: Triagem/Social",
-                question: "Genograma: Linha Dupla e Linha Ziguezague:",
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "No Genograma e Ecomapa, símbolos específicos representam a dinâmica das relações. Se você observa uma linha dupla entre dois membros da família ('José' e 'Maria') e uma linha em ziguezague (ou serrilhada) entre 'José' e o 'Trabalho', isso significa, respectivamente:",
                 options: [
-                    "Conflito / Amor.",
-                    "Relação Forte / Relação Estressante.",
-                    "Distante / Tênue.",
-                    "Casado / Divorciado."
+                    "Relação conflituosa e Relação forte.",
+                    "Relação muito estreita/forte e Relação estressante.",
+                    "Relação distante e Relação tênue.",
+                    "Morando junto e Rompimento."
                 ],
                 correct: 1,
-                comment: "Dupla = Forte. Ziguezague = Estressante/Conflituosa."
+                comment: "Linha dupla = Forte. Linha ziguezague = Estressante/Conflituosa."
             },
             {
-                block: "Bloco 6: Triagem/Social",
-                question: "APGAR Família nota 6:",
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "O APGAR de Família é uma ferramenta de screening para disfunção familiar. Uma família que pontua '6' neste instrumento é classificada como:",
                 options: [
-                    "Funcional.",
-                    "Moderada.",
-                    "Severa disfunção (0-8).",
-                    "Sem risco."
+                    "Família funcional (Alta funcionalidade).",
+                    "Moderada disfunção familiar.",
+                    "Severa disfunção familiar.",
+                    "Família em risco social iminente (sem classificação funcional)."
                 ],
                 correct: 2,
-                comment: "0 a 8 pontos classifica como severa disfunção."
+                comment: "Pontuação de 0 a 8 classifica como <strong>severa disfunção familiar</strong>."
             },
             {
-                block: "Bloco 6: Triagem/Social",
-                question: "Telas aos 3 anos:",
+                block: "Bloco 6: Triagem Neonatal e Saúde Psicossocial",
+                question: "A recomendação atual sobre o tempo de uso de telas para uma criança de 3 anos é:",
                 options: [
-                    "Zero.",
-                    "Máximo 1h/dia supervisionado.",
-                    "2h.",
-                    "Livre."
+                    "Evitar totalmente.",
+                    "Máximo 1h/dia, sempre supervisionado.",
+                    "Máximo 2h/dia, com conteúdo educativo.",
+                    "Livre, desde que não interfira no sono."
                 ],
                 correct: 1,
-                comment: "2 a 5 anos = Máximo 1 hora por dia."
+                comment: "Faixa de 2 a 5 anos = Máximo 1 hora por dia, com supervisão."
             }
         ];
 
